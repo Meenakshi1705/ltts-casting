@@ -1,0 +1,1855 @@
+{
+  "pdf_path": "D:\\casting\\input\\Connector Casting Input.pdf",
+  "timestamp": "20260119_135155",
+  "total_pages": 1,
+  "total_features": 81,
+  "pages": {
+    "page_1": {
+      "image_path": "cv_images\\page_1_20260119_135150.png",
+      "feature_count": 81,
+      "features": [
+        {
+          "type": "wall",
+          "bbox": [
+            68,
+            3439,
+            4856,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 8.454545454545455,
+            "min_thickness": 4.0,
+            "max_thickness": 11.0,
+            "thickness_variation": 1.9476622986935044
+          },
+          "rule_compliance": {
+            "R5": "Yes",
+            "R8": "Needs Review"
+          },
+          "properties": {
+            "length": 4816.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            70,
+            65,
+            4852,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 20.0,
+            "min_thickness": 20.0,
+            "max_thickness": 20.0,
+            "thickness_variation": 0.0
+          },
+          "rule_compliance": {
+            "R5": "Yes",
+            "R8": "Yes"
+          },
+          "properties": {
+            "length": 4812.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            67,
+            69,
+            4858,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 24.0,
+            "min_thickness": 24.0,
+            "max_thickness": 24.0,
+            "thickness_variation": 0.0
+          },
+          "rule_compliance": {
+            "R5": "Yes",
+            "R8": "Yes"
+          },
+          "properties": {
+            "length": 4818.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            67,
+            3436,
+            4858,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 9.652173913043478,
+            "min_thickness": 4.0,
+            "max_thickness": 13.0,
+            "thickness_variation": 2.547098872326402
+          },
+          "rule_compliance": {
+            "R5": "Needs Review",
+            "R8": "No"
+          },
+          "properties": {
+            "length": 4818.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            70,
+            70,
+            40,
+            3405
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 8.25,
+            "min_thickness": 3.0,
+            "max_thickness": 23.0,
+            "thickness_variation": 8.525696452489967
+          },
+          "rule_compliance": {
+            "R5": "No",
+            "R8": "No"
+          },
+          "properties": {
+            "length": 3365.0,
+            "angle": -90.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            4885,
+            68,
+            40,
+            3410
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 0.0,
+            "min_thickness": 0.0,
+            "max_thickness": 0.0,
+            "thickness_variation": 0.0
+          },
+          "rule_compliance": {
+            "R5": "Yes",
+            "R8": "Yes"
+          },
+          "properties": {
+            "length": 3370.0,
+            "angle": -90.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            67,
+            68,
+            40,
+            3410
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 20.0,
+            "min_thickness": 20.0,
+            "max_thickness": 20.0,
+            "thickness_variation": 0.0
+          },
+          "rule_compliance": {
+            "R5": "Yes",
+            "R8": "Yes"
+          },
+          "properties": {
+            "length": 3370.0,
+            "angle": -90.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            4882,
+            70,
+            40,
+            3405
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 0.0,
+            "min_thickness": 0.0,
+            "max_thickness": 0.0,
+            "thickness_variation": 0.0
+          },
+          "rule_compliance": {
+            "R5": "Yes",
+            "R8": "Yes"
+          },
+          "properties": {
+            "length": 3365.0,
+            "angle": -90.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            3298,
+            3001,
+            1623,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 20.4,
+            "min_thickness": 15.0,
+            "max_thickness": 40.0,
+            "thickness_variation": 9.830564581955606
+          },
+          "rule_compliance": {
+            "R5": "No",
+            "R8": "Needs Review"
+          },
+          "properties": {
+            "length": 1583.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            729,
+            952,
+            220,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 16.666666666666668,
+            "min_thickness": 12.0,
+            "max_thickness": 20.0,
+            "thickness_variation": 3.39934634239519
+          },
+          "rule_compliance": {
+            "R5": "Needs Review",
+            "R8": "Yes"
+          },
+          "properties": {
+            "length": 180.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            3295,
+            3005,
+            1626,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 23.6,
+            "min_thickness": 19.0,
+            "max_thickness": 40.0,
+            "thickness_variation": 8.2365041127896
+          },
+          "rule_compliance": {
+            "R5": "No",
+            "R8": "Needs Review"
+          },
+          "properties": {
+            "length": 1586.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            1259,
+            949,
+            220,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 20.333333333333332,
+            "min_thickness": 17.0,
+            "max_thickness": 23.0,
+            "thickness_variation": 2.494438257849294
+          },
+          "rule_compliance": {
+            "R5": "Needs Review",
+            "R8": "Yes"
+          },
+          "properties": {
+            "length": 180.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            1984,
+            2472,
+            1376,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 7.166666666666667,
+            "min_thickness": 3.0,
+            "max_thickness": 18.0,
+            "thickness_variation": 5.013869652163774
+          },
+          "rule_compliance": {
+            "R5": "No",
+            "R8": "No"
+          },
+          "properties": {
+            "length": 1336.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            3980,
+            3122,
+            941,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 0.0,
+            "min_thickness": 0.0,
+            "max_thickness": 0.0,
+            "thickness_variation": 0.0
+          },
+          "rule_compliance": {
+            "R5": "Yes",
+            "R8": "Yes"
+          },
+          "properties": {
+            "length": 901.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            1085,
+            198,
+            40,
+            202
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 33.666666666666664,
+            "min_thickness": 21.0,
+            "max_thickness": 40.0,
+            "thickness_variation": 8.9566858950296
+          },
+          "rule_compliance": {
+            "R5": "No",
+            "R8": "Yes"
+          },
+          "properties": {
+            "length": 162.0,
+            "angle": -90.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            3980,
+            3215,
+            941,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 9.75,
+            "min_thickness": 6.0,
+            "max_thickness": 21.0,
+            "thickness_variation": 6.49519052838329
+          },
+          "rule_compliance": {
+            "R5": "No",
+            "R8": "No"
+          },
+          "properties": {
+            "length": 901.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            432,
+            120,
+            651,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 7.0,
+            "min_thickness": 6.0,
+            "max_thickness": 8.0,
+            "thickness_variation": 1.0
+          },
+          "rule_compliance": {
+            "R5": "Yes",
+            "R8": "Yes"
+          },
+          "properties": {
+            "length": 611.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            2138,
+            1003,
+            40,
+            637
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 7.0,
+            "min_thickness": 7.0,
+            "max_thickness": 7.0,
+            "thickness_variation": 0.0
+          },
+          "rule_compliance": {
+            "R5": "Yes",
+            "R8": "Yes"
+          },
+          "properties": {
+            "length": 597.0,
+            "angle": -90.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            3980,
+            3218,
+            941,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 9.0,
+            "min_thickness": 9.0,
+            "max_thickness": 9.0,
+            "thickness_variation": 0.0
+          },
+          "rule_compliance": {
+            "R5": "Yes",
+            "R8": "Yes"
+          },
+          "properties": {
+            "length": 901.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            1984,
+            2475,
+            1375,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 8.2,
+            "min_thickness": 4.0,
+            "max_thickness": 17.0,
+            "thickness_variation": 4.749736834815167
+          },
+          "rule_compliance": {
+            "R5": "Needs Review",
+            "R8": "No"
+          },
+          "properties": {
+            "length": 1335.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            2141,
+            305,
+            40,
+            686
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 7.0,
+            "min_thickness": 7.0,
+            "max_thickness": 7.0,
+            "thickness_variation": 0.0
+          },
+          "rule_compliance": {
+            "R5": "Yes",
+            "R8": "Yes"
+          },
+          "properties": {
+            "length": 646.0,
+            "angle": -90.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            3980,
+            3297,
+            941,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 6.44,
+            "min_thickness": 3.0,
+            "max_thickness": 15.0,
+            "thickness_variation": 2.4670630312174837
+          },
+          "rule_compliance": {
+            "R5": "Needs Review",
+            "R8": "No"
+          },
+          "properties": {
+            "length": 901.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            1100,
+            3358,
+            181,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 13.090909090909092,
+            "min_thickness": 7.0,
+            "max_thickness": 17.0,
+            "thickness_variation": 2.3141676475196102
+          },
+          "rule_compliance": {
+            "R5": "Needs Review",
+            "R8": "Needs Review"
+          },
+          "properties": {
+            "length": 141.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            432,
+            123,
+            651,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 7.0,
+            "min_thickness": 6.0,
+            "max_thickness": 8.0,
+            "thickness_variation": 1.0
+          },
+          "rule_compliance": {
+            "R5": "Yes",
+            "R8": "Yes"
+          },
+          "properties": {
+            "length": 611.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            3980,
+            3336,
+            941,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 9.1875,
+            "min_thickness": 4.0,
+            "max_thickness": 15.0,
+            "thickness_variation": 2.297246993686138
+          },
+          "rule_compliance": {
+            "R5": "Needs Review",
+            "R8": "No"
+          },
+          "properties": {
+            "length": 901.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            3980,
+            3119,
+            941,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 0.0,
+            "min_thickness": 0.0,
+            "max_thickness": 0.0,
+            "thickness_variation": 0.0
+          },
+          "rule_compliance": {
+            "R5": "Yes",
+            "R8": "Yes"
+          },
+          "properties": {
+            "length": 901.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            3980,
+            3339,
+            941,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 8.347826086956522,
+            "min_thickness": 4.0,
+            "max_thickness": 12.0,
+            "thickness_variation": 1.6967666348772048
+          },
+          "rule_compliance": {
+            "R5": "Yes",
+            "R8": "Needs Review"
+          },
+          "properties": {
+            "length": 901.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            3980,
+            3294,
+            941,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 7.324324324324325,
+            "min_thickness": 3.0,
+            "max_thickness": 18.0,
+            "thickness_variation": 3.7779878389203367
+          },
+          "rule_compliance": {
+            "R5": "Needs Review",
+            "R8": "No"
+          },
+          "properties": {
+            "length": 901.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            2652,
+            150,
+            40,
+            683
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 15.5,
+            "min_thickness": 7.0,
+            "max_thickness": 23.0,
+            "thickness_variation": 6.238322424070967
+          },
+          "rule_compliance": {
+            "R5": "No",
+            "R8": "No"
+          },
+          "properties": {
+            "length": 643.0,
+            "angle": -90.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            3763,
+            469,
+            40,
+            1007
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 8.125,
+            "min_thickness": 5.0,
+            "max_thickness": 12.0,
+            "thickness_variation": 2.368411915187052
+          },
+          "rule_compliance": {
+            "R5": "Needs Review",
+            "R8": "Needs Review"
+          },
+          "properties": {
+            "length": 967.0,
+            "angle": -90.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            1089,
+            1243,
+            40,
+            117
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 40.0,
+            "min_thickness": 40.0,
+            "max_thickness": 40.0,
+            "thickness_variation": 0.0
+          },
+          "rule_compliance": {
+            "R5": "Yes",
+            "R8": "Yes"
+          },
+          "properties": {
+            "length": 77.0,
+            "angle": -90.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            3968,
+            1677,
+            40,
+            951
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 17.307692307692307,
+            "min_thickness": 3.0,
+            "max_thickness": 40.0,
+            "thickness_variation": 11.53846153846154
+          },
+          "rule_compliance": {
+            "R5": "No",
+            "R8": "No"
+          },
+          "properties": {
+            "length": 911.0,
+            "angle": -90.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            2443,
+            2141,
+            40,
+            368
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 12.375,
+            "min_thickness": 3.0,
+            "max_thickness": 21.0,
+            "thickness_variation": 6.7627194973619895
+          },
+          "rule_compliance": {
+            "R5": "No",
+            "R8": "No"
+          },
+          "properties": {
+            "length": 328.0,
+            "angle": -90.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            3963,
+            1678,
+            40,
+            949
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 16.75,
+            "min_thickness": 3.0,
+            "max_thickness": 40.0,
+            "thickness_variation": 11.292512268460607
+          },
+          "rule_compliance": {
+            "R5": "No",
+            "R8": "No"
+          },
+          "properties": {
+            "length": 909.0,
+            "angle": -90.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            3295,
+            3355,
+            728,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 8.105263157894736,
+            "min_thickness": 3.0,
+            "max_thickness": 14.0,
+            "thickness_variation": 4.024853535643191
+          },
+          "rule_compliance": {
+            "R5": "Needs Review",
+            "R8": "No"
+          },
+          "properties": {
+            "length": 688.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            2649,
+            150,
+            40,
+            594
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 22.75,
+            "min_thickness": 21.0,
+            "max_thickness": 26.0,
+            "thickness_variation": 2.0463381929681126
+          },
+          "rule_compliance": {
+            "R5": "Needs Review",
+            "R8": "Yes"
+          },
+          "properties": {
+            "length": 554.0,
+            "angle": -90.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            829,
+            3394,
+            219,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 13.5,
+            "min_thickness": 11.0,
+            "max_thickness": 17.0,
+            "thickness_variation": 1.5545631755148024
+          },
+          "rule_compliance": {
+            "R5": "Yes",
+            "R8": "Yes"
+          },
+          "properties": {
+            "length": 179.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            2440,
+            1377,
+            40,
+            543
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 18.4,
+            "min_thickness": 3.0,
+            "max_thickness": 40.0,
+            "thickness_variation": 17.647662734764623
+          },
+          "rule_compliance": {
+            "R5": "No",
+            "R8": "No"
+          },
+          "properties": {
+            "length": 503.0,
+            "angle": -90.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            3766,
+            469,
+            40,
+            1007
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 9.142857142857142,
+            "min_thickness": 7.0,
+            "max_thickness": 12.0,
+            "thickness_variation": 2.474358296526968
+          },
+          "rule_compliance": {
+            "R5": "Needs Review",
+            "R8": "Yes"
+          },
+          "properties": {
+            "length": 967.0,
+            "angle": -90.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            3295,
+            3316,
+            784,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 7.842105263157895,
+            "min_thickness": 3.0,
+            "max_thickness": 14.0,
+            "thickness_variation": 3.7872800668433726
+          },
+          "rule_compliance": {
+            "R5": "Needs Review",
+            "R8": "No"
+          },
+          "properties": {
+            "length": 744.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            3295,
+            3397,
+            728,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 7.1,
+            "min_thickness": 3.0,
+            "max_thickness": 11.0,
+            "thickness_variation": 2.3000000000000003
+          },
+          "rule_compliance": {
+            "R5": "Needs Review",
+            "R8": "No"
+          },
+          "properties": {
+            "length": 688.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            2434,
+            948,
+            885,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 12.1875,
+            "min_thickness": 4.0,
+            "max_thickness": 21.0,
+            "thickness_variation": 5.027657879171971
+          },
+          "rule_compliance": {
+            "R5": "No",
+            "R8": "No"
+          },
+          "properties": {
+            "length": 845.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            3036,
+            436,
+            795,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 11.0,
+            "min_thickness": 4.0,
+            "max_thickness": 24.0,
+            "thickness_variation": 9.201449161228174
+          },
+          "rule_compliance": {
+            "R5": "No",
+            "R8": "No"
+          },
+          "properties": {
+            "length": 755.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            2798,
+            1272,
+            772,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 16.46153846153846,
+            "min_thickness": 4.0,
+            "max_thickness": 25.0,
+            "thickness_variation": 5.719270860135725
+          },
+          "rule_compliance": {
+            "R5": "No",
+            "R8": "No"
+          },
+          "properties": {
+            "length": 732.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            2434,
+            647,
+            40,
+            650
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 17.142857142857142,
+            "min_thickness": 9.0,
+            "max_thickness": 22.0,
+            "thickness_variation": 3.8703477668983046
+          },
+          "rule_compliance": {
+            "R5": "Needs Review",
+            "R8": "Needs Review"
+          },
+          "properties": {
+            "length": 610.0,
+            "angle": -90.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            3008,
+            635,
+            562,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 13.333333333333334,
+            "min_thickness": 4.0,
+            "max_thickness": 18.0,
+            "thickness_variation": 5.405758246742285
+          },
+          "rule_compliance": {
+            "R5": "No",
+            "R8": "No"
+          },
+          "properties": {
+            "length": 522.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            215,
+            985,
+            40,
+            671
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 7.714285714285714,
+            "min_thickness": 5.0,
+            "max_thickness": 12.0,
+            "thickness_variation": 2.4907993963089563
+          },
+          "rule_compliance": {
+            "R5": "Needs Review",
+            "R8": "Needs Review"
+          },
+          "properties": {
+            "length": 631.0,
+            "angle": -90.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            4126,
+            1677,
+            40,
+            951
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 28.666666666666668,
+            "min_thickness": 6.0,
+            "max_thickness": 40.0,
+            "thickness_variation": 16.027753706895076
+          },
+          "rule_compliance": {
+            "R5": "No",
+            "R8": "No"
+          },
+          "properties": {
+            "length": 911.0,
+            "angle": -90.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            3295,
+            3237,
+            728,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 6.375,
+            "min_thickness": 5.0,
+            "max_thickness": 8.0,
+            "thickness_variation": 0.9921567416492215
+          },
+          "rule_compliance": {
+            "R5": "Yes",
+            "R8": "Yes"
+          },
+          "properties": {
+            "length": 688.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "wall",
+          "bbox": [
+            3295,
+            3240,
+            728,
+            40
+          ],
+          "confidence": 0.8,
+          "measurements": {
+            "avg_thickness": 8.555555555555555,
+            "min_thickness": 7.0,
+            "max_thickness": 10.0,
+            "thickness_variation": 0.9558139185602919
+          },
+          "rule_compliance": {
+            "R5": "Yes",
+            "R8": "Yes"
+          },
+          "properties": {
+            "length": 688.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "corner",
+          "bbox": [
+            4054,
+            3315,
+            40,
+            40
+          ],
+          "confidence": 0.7,
+          "measurements": {
+            "min_angle": 90.0,
+            "avg_angle": 90.0,
+            "acute_angles": 0
+          },
+          "rule_compliance": {
+            "R3": "Yes",
+            "R7": "Yes"
+          },
+          "properties": {
+            "corner_response": 0.2657812535762787
+          }
+        },
+        {
+          "type": "corner",
+          "bbox": [
+            4448,
+            1995,
+            40,
+            40
+          ],
+          "confidence": 0.7,
+          "measurements": {
+            "min_angle": 0.0,
+            "avg_angle": 0.0,
+            "acute_angles": 21
+          },
+          "rule_compliance": {
+            "R3": "No",
+            "R7": "No"
+          },
+          "properties": {
+            "corner_response": 0.2657812535762787
+          }
+        },
+        {
+          "type": "corner",
+          "bbox": [
+            4530,
+            3316,
+            40,
+            40
+          ],
+          "confidence": 0.7,
+          "measurements": {
+            "min_angle": 90.0,
+            "avg_angle": 90.0,
+            "acute_angles": 0
+          },
+          "rule_compliance": {
+            "R3": "Yes",
+            "R7": "Yes"
+          },
+          "properties": {
+            "corner_response": 0.2657812535762787
+          }
+        },
+        {
+          "type": "corner",
+          "bbox": [
+            3863,
+            3029,
+            40,
+            40
+          ],
+          "confidence": 0.7,
+          "measurements": {
+            "min_angle": 0.0,
+            "avg_angle": 0.0,
+            "acute_angles": 1
+          },
+          "rule_compliance": {
+            "R3": "No",
+            "R7": "No"
+          },
+          "properties": {
+            "corner_response": 0.2657812535762787
+          }
+        },
+        {
+          "type": "corner",
+          "bbox": [
+            173,
+            2887,
+            40,
+            40
+          ],
+          "confidence": 0.7,
+          "measurements": {
+            "min_angle": 90.0,
+            "avg_angle": 90.0,
+            "acute_angles": 0
+          },
+          "rule_compliance": {
+            "R3": "Yes",
+            "R7": "Yes"
+          },
+          "properties": {
+            "corner_response": 0.2657812535762787
+          }
+        },
+        {
+          "type": "corner",
+          "bbox": [
+            173,
+            2885,
+            40,
+            40
+          ],
+          "confidence": 0.7,
+          "measurements": {
+            "min_angle": 90.0,
+            "avg_angle": 90.0,
+            "acute_angles": 0
+          },
+          "rule_compliance": {
+            "R3": "Yes",
+            "R7": "Yes"
+          },
+          "properties": {
+            "corner_response": 0.2657812535762787
+          }
+        },
+        {
+          "type": "corner",
+          "bbox": [
+            3861,
+            3029,
+            40,
+            40
+          ],
+          "confidence": 0.7,
+          "measurements": {
+            "min_angle": 0.0,
+            "avg_angle": 0.0,
+            "acute_angles": 1
+          },
+          "rule_compliance": {
+            "R3": "No",
+            "R7": "No"
+          },
+          "properties": {
+            "corner_response": 0.2657812535762787
+          }
+        },
+        {
+          "type": "corner",
+          "bbox": [
+            4053,
+            3315,
+            40,
+            40
+          ],
+          "confidence": 0.7,
+          "measurements": {
+            "min_angle": 90.0,
+            "avg_angle": 90.0,
+            "acute_angles": 0
+          },
+          "rule_compliance": {
+            "R3": "Yes",
+            "R7": "Yes"
+          },
+          "properties": {
+            "corner_response": 0.2657812535762787
+          }
+        },
+        {
+          "type": "corner",
+          "bbox": [
+            4531,
+            3316,
+            40,
+            40
+          ],
+          "confidence": 0.7,
+          "measurements": {
+            "min_angle": 90.0,
+            "avg_angle": 90.0,
+            "acute_angles": 0
+          },
+          "rule_compliance": {
+            "R3": "Yes",
+            "R7": "Yes"
+          },
+          "properties": {
+            "corner_response": 0.2657812535762787
+          }
+        },
+        {
+          "type": "corner",
+          "bbox": [
+            4531,
+            3315,
+            40,
+            40
+          ],
+          "confidence": 0.7,
+          "measurements": {
+            "min_angle": 90.0,
+            "avg_angle": 90.0,
+            "acute_angles": 0
+          },
+          "rule_compliance": {
+            "R3": "Yes",
+            "R7": "Yes"
+          },
+          "properties": {
+            "corner_response": 0.2657812535762787
+          }
+        },
+        {
+          "type": "corner",
+          "bbox": [
+            3862,
+            3029,
+            40,
+            40
+          ],
+          "confidence": 0.7,
+          "measurements": {
+            "min_angle": 0.0,
+            "avg_angle": 0.0,
+            "acute_angles": 1
+          },
+          "rule_compliance": {
+            "R3": "No",
+            "R7": "No"
+          },
+          "properties": {
+            "corner_response": 0.2657812535762787
+          }
+        },
+        {
+          "type": "corner",
+          "bbox": [
+            4053,
+            3316,
+            40,
+            40
+          ],
+          "confidence": 0.7,
+          "measurements": {
+            "min_angle": 90.0,
+            "avg_angle": 90.0,
+            "acute_angles": 0
+          },
+          "rule_compliance": {
+            "R3": "Yes",
+            "R7": "Yes"
+          },
+          "properties": {
+            "corner_response": 0.2657812535762787
+          }
+        },
+        {
+          "type": "corner",
+          "bbox": [
+            4530,
+            3317,
+            40,
+            40
+          ],
+          "confidence": 0.7,
+          "measurements": {
+            "min_angle": 0.0,
+            "avg_angle": 0.0,
+            "acute_angles": 1
+          },
+          "rule_compliance": {
+            "R3": "No",
+            "R7": "No"
+          },
+          "properties": {
+            "corner_response": 0.2657812535762787
+          }
+        },
+        {
+          "type": "corner",
+          "bbox": [
+            4448,
+            1996,
+            40,
+            40
+          ],
+          "confidence": 0.7,
+          "measurements": {
+            "min_angle": 0.0,
+            "avg_angle": 0.0,
+            "acute_angles": 21
+          },
+          "rule_compliance": {
+            "R3": "No",
+            "R7": "No"
+          },
+          "properties": {
+            "corner_response": 0.2657812535762787
+          }
+        },
+        {
+          "type": "corner",
+          "bbox": [
+            4530,
+            3315,
+            40,
+            40
+          ],
+          "confidence": 0.7,
+          "measurements": {
+            "min_angle": 90.0,
+            "avg_angle": 90.0,
+            "acute_angles": 0
+          },
+          "rule_compliance": {
+            "R3": "Yes",
+            "R7": "Yes"
+          },
+          "properties": {
+            "corner_response": 0.2657812535762787
+          }
+        },
+        {
+          "type": "corner",
+          "bbox": [
+            4447,
+            1997,
+            40,
+            40
+          ],
+          "confidence": 0.7,
+          "measurements": {
+            "min_angle": 0.0,
+            "avg_angle": 0.0,
+            "acute_angles": 21
+          },
+          "rule_compliance": {
+            "R3": "No",
+            "R7": "No"
+          },
+          "properties": {
+            "corner_response": 0.2657812535762787
+          }
+        },
+        {
+          "type": "corner",
+          "bbox": [
+            4052,
+            3315,
+            40,
+            40
+          ],
+          "confidence": 0.7,
+          "measurements": {
+            "min_angle": 90.0,
+            "avg_angle": 90.0,
+            "acute_angles": 0
+          },
+          "rule_compliance": {
+            "R3": "Yes",
+            "R7": "Yes"
+          },
+          "properties": {
+            "corner_response": 0.2657812535762787
+          }
+        },
+        {
+          "type": "corner",
+          "bbox": [
+            4529,
+            3317,
+            40,
+            40
+          ],
+          "confidence": 0.7,
+          "measurements": {
+            "min_angle": 0.0,
+            "avg_angle": 0.0,
+            "acute_angles": 1
+          },
+          "rule_compliance": {
+            "R3": "No",
+            "R7": "No"
+          },
+          "properties": {
+            "corner_response": 0.2657812535762787
+          }
+        },
+        {
+          "type": "corner",
+          "bbox": [
+            4531,
+            3317,
+            40,
+            40
+          ],
+          "confidence": 0.7,
+          "measurements": {
+            "min_angle": 0.0,
+            "avg_angle": 0.0,
+            "acute_angles": 1
+          },
+          "rule_compliance": {
+            "R3": "No",
+            "R7": "No"
+          },
+          "properties": {
+            "corner_response": 0.2657812535762787
+          }
+        },
+        {
+          "type": "corner",
+          "bbox": [
+            4529,
+            3316,
+            40,
+            40
+          ],
+          "confidence": 0.7,
+          "measurements": {
+            "min_angle": 90.0,
+            "avg_angle": 90.0,
+            "acute_angles": 0
+          },
+          "rule_compliance": {
+            "R3": "Yes",
+            "R7": "Yes"
+          },
+          "properties": {
+            "corner_response": 0.2657812535762787
+          }
+        },
+        {
+          "type": "junction",
+          "bbox": [
+            57,
+            55,
+            4879,
+            3435
+          ],
+          "confidence": 0.6,
+          "measurements": {
+            "total_lines": 3647,
+            "unique_sections": 10,
+            "complexity_score": 10
+          },
+          "rule_compliance": {
+            "R4": "No"
+          },
+          "properties": {
+            "area": 16255923.0
+          }
+        },
+        {
+          "type": "rib",
+          "bbox": [
+            75,
+            70,
+            4842,
+            88
+          ],
+          "confidence": 0.7,
+          "measurements": {},
+          "rule_compliance": {
+            "R9": "Needs Review"
+          },
+          "properties": {
+            "spacing": 58.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "rib",
+          "bbox": [
+            73,
+            3399,
+            4846,
+            75
+          ],
+          "confidence": 0.7,
+          "measurements": {},
+          "rule_compliance": {
+            "R9": "Yes"
+          },
+          "properties": {
+            "spacing": 45.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "rib",
+          "bbox": [
+            72,
+            74,
+            4848,
+            81
+          ],
+          "confidence": 0.7,
+          "measurements": {},
+          "rule_compliance": {
+            "R9": "Needs Review"
+          },
+          "properties": {
+            "spacing": 51.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "rib",
+          "bbox": [
+            72,
+            3344,
+            4848,
+            127
+          ],
+          "confidence": 0.7,
+          "measurements": {},
+          "rule_compliance": {
+            "R9": "No"
+          },
+          "properties": {
+            "spacing": 97.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "rib",
+          "bbox": [
+            177,
+            3127,
+            4739,
+            123
+          ],
+          "confidence": 0.7,
+          "measurements": {},
+          "rule_compliance": {
+            "R9": "No"
+          },
+          "properties": {
+            "spacing": 93.0,
+            "angle": 0.0
+          }
+        },
+        {
+          "type": "boss",
+          "bbox": [
+            3562,
+            3375,
+            122,
+            122
+          ],
+          "confidence": 0.6,
+          "measurements": {},
+          "rule_compliance": {
+            "R10": "No"
+          },
+          "properties": {
+            "size": 61.073726654052734,
+            "response": 0.0
+          }
+        },
+        {
+          "type": "boss",
+          "bbox": [
+            358,
+            660,
+            118,
+            118
+          ],
+          "confidence": 0.6,
+          "measurements": {},
+          "rule_compliance": {
+            "R10": "Needs Review"
+          },
+          "properties": {
+            "size": 59.52125930786133,
+            "response": 0.0
+          }
+        },
+        {
+          "type": "boss",
+          "bbox": [
+            1736,
+            660,
+            118,
+            118
+          ],
+          "confidence": 0.6,
+          "measurements": {},
+          "rule_compliance": {
+            "R10": "Needs Review"
+          },
+          "properties": {
+            "size": 59.03505325317383,
+            "response": 0.0
+          }
+        },
+        {
+          "type": "boss",
+          "bbox": [
+            4104,
+            3366,
+            82,
+            82
+          ],
+          "confidence": 0.6,
+          "measurements": {},
+          "rule_compliance": {
+            "R10": "Needs Review"
+          },
+          "properties": {
+            "size": 41.531375885009766,
+            "response": 0.0
+          }
+        },
+        {
+          "type": "boss",
+          "bbox": [
+            2704,
+            905,
+            76,
+            76
+          ],
+          "confidence": 0.6,
+          "measurements": {},
+          "rule_compliance": {
+            "R10": "Needs Review"
+          },
+          "properties": {
+            "size": 38.70643615722656,
+            "response": 0.0
+          }
+        }
+      ]
+    }
+  }
+}

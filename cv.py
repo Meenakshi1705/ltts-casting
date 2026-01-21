@@ -44,7 +44,7 @@ class BoundingBox:
     y: int
     width: int
     height: int
-    feature_type: str  # "wall", "corner", "junction", "rib", "boss"
+    feature_type: str  
     confidence: float
     properties: Dict[str, Any] = None
 
@@ -52,7 +52,7 @@ class BoundingBox:
 class FeatureAnalysis:
     """Analysis result for a specific feature"""
     bbox: BoundingBox
-    rule_compliance: Dict[str, str]  # rule_id -> "Yes"/"No"/"Needs Review"
+    rule_compliance: Dict[str, str]  
     measurements: Dict[str, float]
     notes: List[str]
 
@@ -64,32 +64,69 @@ def preprocess_image(image_path: str) -> Tuple[np.ndarray, np.ndarray, np.ndarra
         raise ValueError(f"Could not load image: {image_path}")
     
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
     
-    blurred = cv2.GaussianBlur(gray, (5, 5), 0)
+    cleaned = cv2.morphologyEx(gray, cv2.MORPH_OPEN, kernel)
     
-    edges = cv2.Canny(blurred, 50, 150)
+    # Apply Gaussian blur to reduce noise
+    blurred = cv2.GaussianBlur(cleaned, (5, 5), 0)
+    
+    binary = cv2.adaptiveThreshold(blurred, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, 
+                                  cv2.THRESH_BINARY_INV, 11, 2)
+    
+    kernel_clean = cv2.getStructuringElement(cv2.MORPH_RECT, (2, 2))
+    binary = cv2.morphologyEx(binary, cv2.MORPH_OPEN, kernel_clean)
+    
+    # Edge detection on cleaned image
+    edges = cv2.Canny(binary, 50, 150)
     
     return img, gray, edges
 
-def detect_walls(edges: np.ndarray, min_length: int = 50) -> List[BoundingBox]:
-    """Detect wall sections using line detection"""
+def detect_walls(edges: np.ndarray, min_length: int = 100) -> List[BoundingBox]:
+    """Detect wall sections using line detection - focus on main geometry"""
     bboxes = []
     
-    lines = cv2.HoughLinesP(edges, 1, np.pi/180, threshold=150, 
-                           minLineLength=min_length, maxLineGap=10)
+    # Use much stricter parameters to avoid detecting text/dimensions
+    lines = cv2.HoughLinesP(edges, 1, np.pi/180, threshold=200, 
+                           minLineLength=min_length, maxLineGap=20)
     
     if lines is not None:
-        lines = lines[:50] 
+        # Filter lines by length and position to focus on main geometry
+        filtered_lines = []
+        img_height, img_width = edges.shape
         
-        for i, line in enumerate(lines):
+        for line in lines:
+            x1, y1, x2, y2 = line[0]
+            length = float(np.sqrt((x2-x1)**2 + (y2-y1)**2))
+            
+            # Skip very short lines (likely text/dimensions)
+            if length < min_length:
+                continue
+                
+            # Skip lines too close to edges (likely borders/frames)
+            margin = 50
+            if (x1 < margin or x2 < margin or y1 < margin or y2 < margin or
+                x1 > img_width-margin or x2 > img_width-margin or 
+                y1 > img_height-margin or y2 > img_height-margin):
+                continue
+            
+            filtered_lines.append(line)
+        
+        # Limit to reasonable number of main walls
+        filtered_lines = filtered_lines[:15]  # Max 15 wall features
+        
+        for i, line in enumerate(filtered_lines):
             x1, y1, x2, y2 = line[0]
             
-            padding = 20
+            # Create bounding box around line with reasonable padding
+            padding = 30
             x = min(x1, x2) - padding
             y = min(y1, y2) - padding
             width = abs(x2 - x1) + 2 * padding
             height = abs(y2 - y1) + 2 * padding
             
+            # Calculate line properties
             length = float(np.sqrt((x2-x1)**2 + (y2-y1)**2))
             angle = float(np.arctan2(y2-y1, x2-x1) * 180 / np.pi)
             
@@ -105,21 +142,37 @@ def detect_walls(edges: np.ndarray, min_length: int = 50) -> List[BoundingBox]:
     return bboxes
 
 def detect_corners(edges: np.ndarray) -> List[BoundingBox]:
-    """Detect corner features using Harris corner detection"""
+    """Detect corner features using Harris corner detection - avoid text"""
     bboxes = []
     
+    # Harris corner detection
     corners = cv2.cornerHarris(edges, 2, 3, 0.04)
     corners = cv2.dilate(corners, None)
     
-    corner_coords = np.where(corners > 0.05 * corners.max())
+    # Find corner coordinates with much higher threshold to avoid text
+    corner_coords = np.where(corners > 0.1 * corners.max())
     
-    if len(corner_coords[0]) > 20:
-        corner_strengths = corners[corner_coords]
-        top_indices = np.argsort(corner_strengths)[-20:]
-        corner_coords = (corner_coords[0][top_indices], corner_coords[1][top_indices])
+    # Filter corners that are too close to image edges (likely text/dimensions)
+    img_height, img_width = edges.shape
+    margin = 80
     
+    filtered_corners = []
     for y, x in zip(corner_coords[0], corner_coords[1]):
-        size = 40
+        # Skip corners too close to edges
+        if (x < margin or y < margin or 
+            x > img_width-margin or y > img_height-margin):
+            continue
+        filtered_corners.append((y, x))
+    
+    # Limit number of corners and take strongest ones
+    if len(filtered_corners) > 10:
+        corner_strengths = [corners[y, x] for y, x in filtered_corners]
+        top_indices = np.argsort(corner_strengths)[-10:]
+        filtered_corners = [filtered_corners[i] for i in top_indices]
+    
+    for y, x in filtered_corners:
+        # Create small bounding box around corner
+        size = 50
         bbox = BoundingBox(
             x=max(0, int(x-size//2)), y=max(0, int(y-size//2)), 
             width=size, height=size,

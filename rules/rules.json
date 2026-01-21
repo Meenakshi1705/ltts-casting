@@ -1,322 +1,255 @@
 {
-  "rules_version": "1.0",
+  "rules_version": "2.0",
   "casting_category": "Bracket Casting",
   "default_material": "Generic Ferrous / Non-Ferrous",
+  "evaluation_mode": "image_based",
   "rules": [
     {
       "rule_id": "R1",
-      "title": "Visualize Casting in the Mold",
-      "engineering_intent": "Ensure metal flow and solidification are feasible without isolated heavy masses.",
-      "defect_risk": {
-        "name": "Shrinkage Porosity / Cracks",
-        "severity": "High"
-      },
-      "geometry_logic": {
-        "check_isolated_masses": true,
-        "min_connection_ratio": 0.7
-      },
+      "title": "Visualize Casting in the Mold for Proper Filling and Solidification",
+      "engineering_intent": "Ensure the geometry allows predictable mold filling and solidification without isolated heavy masses.",
       "checklist_items": [
         {
-          "check_id": "1.1",
-          "text": "No isolated heavy sections without clear feeding paths"
+          "check_id": "R1.1",
+          "text": "No isolated heavy sections without visible feeding paths"
         },
         {
-          "check_id": "1.2",
-          "text": "Section changes are visually traceable across views"
+          "check_id": "R1.2",
+          "text": "Section changes are visually traceable across the geometry"
         },
         {
-          "check_id": "1.3",
-          "text": "Geometry allows clear mold fill and solidification understanding"
+          "check_id": "R1.3",
+          "text": "Overall geometry allows clear understanding of mold fill direction"
         }
       ],
-      "ai_guidance": "Look for bulky regions connected by thin walls or necks that may solidify last and remain unfed.",
-      "reference_images": {
-        "correct": "rule_images/R1/correct/",
-        "incorrect": "rule_images/R1/incorrect/"
-      }
+      "ai_guidance": "Look for bulky regions connected by thin necks or walls that may solidify last and remain unfed."
     },
 
     {
       "rule_id": "R2",
-      "title": "Design for Soundness (Directional Solidification)",
-      "engineering_intent": "Ensure progressive increase in section thickness toward feeding zones.",
-      "defect_risk": {
-        "name": "Internal Shrinkage Porosity",
-        "severity": "High"
-      },
-      "geometry_logic": {
-        "progressive_thickness_required": true,
-        "reverse_thickness_gradient_allowed": false
-      },
+      "title": "Design for Directional Solidification to Prevent Shrinkage Porosity",
+      "engineering_intent": "Promote progressive solidification toward feeding zones to avoid shrinkage.",
       "checklist_items": [
         {
-          "check_id": "2.1",
-          "text": "Wall thickness increases progressively toward heavy sections"
+          "check_id": "R2.1",
+          "text": "Wall thickness increases progressively toward heavier sections"
         },
         {
-          "check_id": "2.2",
-          "text": "No reverse taper that blocks feeding"
+          "check_id": "R2.2",
+          "text": "Heaviest sections appear suitable for riser placement"
         },
         {
-          "check_id": "2.3",
-          "text": "Heaviest sections are not isolated from potential riser locations"
+          "check_id": "R2.3",
+          "text": "No reverse thickness gradients that could trap shrinkage"
         }
       ],
-      "ai_guidance": "Check whether thinner regions would freeze before thicker ones without a feeding source.",
-      "reference_images": {
-        "correct": "rule_images/R2/correct/",
-        "incorrect": "rule_images/R2/incorrect/"
-      }
+      "ai_guidance": "Identify whether thick sections are downstream of thinner sections in the solidification path."
     },
 
     {
       "rule_id": "R3",
-      "title": "Avoid Sharp Corners and Angles",
-      "engineering_intent": "Prevent localized heat concentration and stress risers.",
-      "defect_risk": {
-        "name": "Hot Spots / Cracking",
-        "severity": "Medium"
-      },
-      "geometry_logic": {
-        "min_internal_radius_ratio": 0.25,
-        "acute_angle_threshold_deg": 90
-      },
+      "title": "Avoid Sharp Corners and Angles to Eliminate Hot Spots",
+      "engineering_intent": "Prevent hot spots, stress concentration, and poor metal flow at junctions.",
       "checklist_items": [
         {
-          "check_id": "3.1",
-          "text": "Internal corners include fillets"
+          "check_id": "R3.1",
+          "text": "No sharp internal corners at section junctions"
         },
         {
-          "check_id": "3.2",
-          "text": "No acute internal angles creating hotspots"
+          "check_id": "R3.2",
+          "text": "External corners are eased or rounded"
         },
         {
-          "check_id": "3.3",
-          "text": "External edges are eased to avoid mold damage"
+          "check_id": "R3.3",
+          "text": "Junctions do not visually concentrate excess material"
         }
       ],
-      "ai_guidance": "Focus on re-entrant corners at rib-wall and wall-wall junctions.",
-      "reference_images": {
-        "correct": "rule_images/R3/correct/",
-        "incorrect": "rule_images/R3/incorrect/"
-      }
+      "ai_guidance": "Sharp re-entrant corners often appear darker or thicker in images and are common hot-spot locations."
     },
 
     {
       "rule_id": "R4",
-      "title": "Minimize the Number of Sections at Junctions",
-      "engineering_intent": "Avoid excessive metal accumulation at multi-section intersections.",
-      "defect_risk": {
-        "name": "Hot Spots / Distortion",
-        "severity": "Medium"
-      },
-      "geometry_logic": {
-        "max_sections_per_junction": 2,
-        "cored_relief_permitted": true
-      },
+      "title": "Minimize Intersecting Sections at Junctions",
+      "engineering_intent": "Reduce hot spots caused by multiple sections meeting at a single junction.",
       "checklist_items": [
         {
-          "check_id": "4.1",
-          "text": "No more than two sections intersect at a single junction"
+          "check_id": "R4.1",
+          "text": "No more than two major sections intersect at a single junction"
         },
         {
-          "check_id": "4.2",
-          "text": "Junctions are staggered or relieved where needed"
+          "check_id": "R4.2",
+          "text": "Intersecting sections are staggered where possible"
         },
         {
-          "check_id": "4.3",
-          "text": "Cored holes used to reduce mass at unavoidable intersections"
+          "check_id": "R4.3",
+          "text": "Complex junctions show visible relief or blending"
         }
       ],
-      "ai_guidance": "Identify T, X, or star junctions and assess cooling imbalance.",
-      "reference_images": {
-        "correct": "rule_images/R4/correct/",
-        "incorrect": "rule_images/R4/incorrect/"
-      }
+      "ai_guidance": "T, X, and star-shaped junctions are high-risk unless staggered or relieved."
     },
 
     {
       "rule_id": "R5",
-      "title": "Employ Uniform Wall Sections",
-      "engineering_intent": "Promote even cooling and reduce feeding-related defects.",
-      "defect_risk": {
-        "name": "Shrinkage Voids",
-        "severity": "High"
-      },
-      "geometry_logic": {
-        "max_thickness_variation_ratio": 1.3
-      },
+      "title": "Maintain Uniform Wall Thickness for Even Cooling",
+      "engineering_intent": "Ensure even cooling and prevent thinner sections from being starved by thicker ones.",
       "checklist_items": [
         {
-          "check_id": "5.1",
-          "text": "Wall thickness is largely uniform throughout the casting"
+          "check_id": "R5.1",
+          "text": "Wall thickness appears uniform across the casting"
         },
         {
-          "check_id": "5.2",
-          "text": "Thick sections are cored or relieved where possible"
+          "check_id": "R5.2",
+          "text": "No abrupt thick-to-thin wall transitions"
         },
         {
-          "check_id": "5.3",
-          "text": "Ribs are used instead of wall thickening"
+          "check_id": "R5.3",
+          "text": "Heavily thick sections are avoided or visually relieved"
         }
       ],
-      "ai_guidance": "Compare adjacent wall thicknesses and look for sudden mass buildup.",
-      "reference_images": {
-        "correct": "rule_images/R5/correct/",
-        "incorrect": "rule_images/R5/incorrect/"
-      }
+      "ai_guidance": "Visually inspect for sudden wall thickening or bulky pads attached to thin walls."
     },
 
     {
       "rule_id": "R6",
-      "title": "Correctly Proportion Inner Walls",
-      "engineering_intent": "Prevent slow-cooling inner masses from dominating solidification.",
-      "defect_risk": {
-        "name": "Internal Porosity / Weak Zones",
-        "severity": "Medium"
-      },
-      "geometry_logic": {
-        "inner_to_outer_wall_ratio": 0.9
-      },
+      "title": "Proportion Inner Walls and Cored Regions to Avoid Slow Cooling",
+      "engineering_intent": "Avoid slow-cooling internal masses that cause strength variation and porosity.",
       "checklist_items": [
         {
-          "check_id": "6.1",
-          "text": "Inner walls are thinner than outer walls"
+          "check_id": "R6.1",
+          "text": "Inner walls appear thinner than or comparable to outer walls"
         },
         {
-          "check_id": "6.2",
-          "text": "No enclosed heavy inner sections"
+          "check_id": "R6.2",
+          "text": "No excessive internal metal buildup around cores"
+        },
+        {
+          "check_id": "R6.3",
+          "text": "Thin internal cavities are avoided where impractical"
         }
       ],
-      "ai_guidance": "Pay special attention to cored regions and enclosed cavities.",
-      "reference_images": {
-        "correct": "rule_images/R6/correct/",
-        "incorrect": "rule_images/R6/incorrect/"
-      }
+      "ai_guidance": "Deep internal pockets with thick surrounding walls are common shrinkage risk areas."
     },
 
     {
       "rule_id": "R7",
-      "title": "Fillet All Sharp Angles",
-      "engineering_intent": "Reduce stress concentration and improve mold filling.",
-      "defect_risk": {
-        "name": "Cracks / Hot Spots",
-        "severity": "Medium"
-      },
-      "geometry_logic": {
-        "fillet_required": true,
-        "max_fillet_radius_ratio": 0.5
-      },
+      "title": "Fillet Sharp Angles to Reduce Stress and Cracking",
+      "engineering_intent": "Reduce stress concentration, cracking, and hot spots while improving moldability.",
       "checklist_items": [
         {
-          "check_id": "7.1",
-          "text": "All re-entrant corners are filleted"
+          "check_id": "R7.1",
+          "text": "Internal corners have visible fillets"
         },
         {
-          "check_id": "7.2",
-          "text": "Fillet size is appropriate (not excessively large)"
+          "check_id": "R7.2",
+          "text": "Fillets are consistent across similar junctions"
+        },
+        {
+          "check_id": "R7.3",
+          "text": "No knife-edge or feather-thin features present"
         }
       ],
-      "ai_guidance": "Look for stress-prone corners, especially at load-bearing regions.",
-      "reference_images": {
-        "correct": "rule_images/R7/correct/",
-        "incorrect": "rule_images/R7/incorrect/"
-      }
+      "ai_guidance": "Uniform filleting improves both structural integrity and casting soundness."
     },
 
     {
       "rule_id": "R8",
-      "title": "Avoid Abrupt Section Changes",
-      "engineering_intent": "Ensure smooth thermal gradients during solidification.",
-      "defect_risk": {
-        "name": "Shrinkage / Stress Concentration",
-        "severity": "High"
-      },
-      "geometry_logic": {
-        "max_thickness_ratio": 2.0,
-        "max_taper_ratio": 4.0
-      },
+      "title": "Avoid Abrupt Section Changes Using Tapers or Radii",
+      "engineering_intent": "Prevent porosity and stress caused by sudden thickness variation.",
       "checklist_items": [
         {
-          "check_id": "8.1",
-          "text": "Thickness changes are gradual and blended"
+          "check_id": "R8.1",
+          "text": "Thickness transitions are gradual and blended"
         },
         {
-          "check_id": "8.2",
-          "text": "No abrupt step changes in wall thickness"
+          "check_id": "R8.2",
+          "text": "No sudden step changes between adjoining sections"
+        },
+        {
+          "check_id": "R8.3",
+          "text": "Tapered or radiused transitions are used where needed"
         }
       ],
-      "ai_guidance": "Scan transitions between thin and thick regions.",
-      "reference_images": {
-        "correct": "rule_images/R8/correct/",
-        "incorrect": "rule_images/R8/incorrect/"
-      }
+      "ai_guidance": "Abrupt steps often appear as sharp visual discontinuities in section depth."
     },
 
     {
       "rule_id": "R9",
-      "title": "Optimize Ribs and Brackets",
-      "engineering_intent": "Improve stiffness without creating hotspots.",
-      "defect_risk": {
-        "name": "Cracking / Hot Spots",
-        "severity": "Medium"
-      },
-      "geometry_logic": {
-        "rib_to_wall_ratio": 0.8,
-        "cross_ribbing_allowed": false
-      },
+      "title": "Design Ribs and Brackets for Stiffness Without Hot Spots",
+      "engineering_intent": "Increase stiffness without creating hot spots or feeding difficulties.",
       "checklist_items": [
         {
-          "check_id": "9.1",
-          "text": "Ribs are thinner than adjoining walls"
+          "check_id": "R9.1",
+          "text": "Ribs are used to stiffen rather than thicken walls"
         },
         {
-          "check_id": "9.2",
-          "text": "No cross-ribbing creating metal accumulation"
+          "check_id": "R9.2",
+          "text": "Ribs do not intersect in complex cross patterns"
         },
         {
-          "check_id": "9.3",
-          "text": "Ribs are deeper rather than thicker"
+          "check_id": "R9.3",
+          "text": "Ribs blend smoothly into the main casting"
         }
       ],
-      "ai_guidance": "Evaluate rib intersections and spacing.",
-      "reference_images": {
-        "correct": "rule_images/R9/correct/",
-        "incorrect": "rule_images/R9/incorrect/"
-      }
+      "ai_guidance": "Excessive rib intersections and thick rib bases commonly create hot spots."
     },
 
     {
       "rule_id": "R10",
-      "title": "Avoid Excessive Bosses, Lugs, and Pads",
-      "engineering_intent": "Prevent localized heavy masses that are hard to feed.",
-      "defect_risk": {
-        "name": "Hot Spots / Open Grain",
-        "severity": "High"
-      },
-      "geometry_logic": {
-        "boss_thickness_less_than_wall": true,
-        "isolated_boss_allowed": false
-      },
+      "title": "Minimize Bosses, Lugs, and Pads to Reduce Localized Shrinkage",
+      "engineering_intent": "Reduce localized heavy masses that cause shrinkage and machining issues.",
       "checklist_items": [
         {
-          "check_id": "10.1",
-          "text": "Bosses are blended smoothly into walls"
+          "check_id": "R10.1",
+          "text": "Bosses and pads are minimized or blended smoothly"
         },
         {
-          "check_id": "10.2",
-          "text": "No isolated pads or lugs creating heavy sections"
+          "check_id": "R10.2",
+          "text": "No isolated thick bosses attached to thin walls"
         },
         {
-          "check_id": "10.3",
-          "text": "Boss walls are of uniform thickness"
+          "check_id": "R10.3",
+          "text": "Boss geometry allows practical machining"
         }
       ],
-      "ai_guidance": "Inspect mounting and fastening regions closely.",
-      "reference_images": {
-        "correct": "rule_images/R10/correct/",
-        "incorrect": "rule_images/R10/incorrect/"
-      }
+      "ai_guidance": "Standalone pads and bosses are frequent sources of shrinkage and poor surface quality."
+    },
+
+    {
+      "rule_id": "R11",
+      "title": "Provide Adequate Draft for Pattern Withdrawal",
+      "engineering_intent": "Ensure safe pattern withdrawal and avoid mold damage.",
+      "checklist_items": [
+        {
+          "check_id": "R11.1",
+          "text": "External vertical faces appear to include draft"
+        },
+        {
+          "check_id": "R11.2",
+          "text": "Internal pockets and cavities appear drafted"
+        }
+      ],
+      "ai_guidance": "Vertical walls without taper are difficult to withdraw from sand molds."
+    },
+
+    {
+      "rule_id": "R12",
+      "title": "Limit Surface Finish and Marking Expectations to Casting Capability",
+      "engineering_intent": "Ensure surface finish expectations match casting capability.",
+      "checklist_items": [
+        {
+          "check_id": "R12.1",
+          "text": "Tight surface finish expectations appear limited to machined areas"
+        },
+        {
+          "check_id": "R12.2",
+          "text": "Cast text and logos are readable and not overly thin"
+        },
+        {
+          "check_id": "R12.3",
+          "text": "No cosmetic requirements on hidden or non-functional surfaces"
+        }
+      ],
+      "ai_guidance": "As-cast sand surfaces are inherently rough; cosmetic precision should be limited."
     }
   ]
 }

@@ -17,13 +17,14 @@ from casting_config import (
     get_process_suggestion, get_filename_components
 )
 
+
 PROJECT_ID = "gemini-gdandt-01"
 GEMINI_LOCATION = "us-central1"
 GEMINI_MODEL = "gemini-2.5-flash"
 API_DELAY = 2
 API_TIMEOUT = 120  
 
-RULES_PATH = r"D:\casting\input\Casting_Design_Checklist.xlsx"
+RULES_PATH = r"D:\casting\rules\rules.json"
 OUTPUT_DIR = "output"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -31,60 +32,7 @@ vertexai.init(project=PROJECT_ID, location=GEMINI_LOCATION)
 
 model = GenerativeModel(GEMINI_MODEL)
 
-def load_rules_from_excel(excel_path):
-    """Load rules from Excel checklist file"""
-    df = pd.read_excel(excel_path)
-    
-    rules = []
-    current_rule = None
-    
-    for _, row in df.iterrows():
-        rule_number = row['#']
-        rule_header = row['Rule / Header']
-        hint_description = row['Hint / Description']
-        check_item = row['Check Item']
-        
-        if pd.notna(rule_number):
-            if current_rule is not None:
-                rules.append(current_rule)
-            
-            current_rule = {
-                'rule_id': f"R{int(rule_number)}",
-                'title': rule_header,
-                'engineering_intent': hint_description if pd.notna(hint_description) else "",
-                'ai_guidance': hint_description if pd.notna(hint_description) else "",
-                'checklist_items': []
-            }
-        
-        if pd.notna(check_item) and current_rule is not None:
-            rule_num = int(current_rule['rule_id'][1:])
-            item_count = len(current_rule['checklist_items']) + 1
-            check_id = f"{rule_num}.{item_count}"
-            
-            current_rule['checklist_items'].append({
-                'check_id': check_id,
-                'text': check_item
-            })
-    
-    if current_rule is not None:
-        rules.append(current_rule)
-    
-    return {"rules": rules}
-    os.makedirs(output_dir, exist_ok=True)
-
-    pages = convert_from_path(pdf_path, dpi=300)
-    image_paths = []
-
-    for i, page in enumerate(pages):
-        img_path = os.path.join(output_dir, f"page_{i+1}.png")
-        page.save(img_path, "PNG")
-        image_paths.append(img_path)
-
-    return image_paths
-
-
 def pdf_to_images(pdf_path, output_dir="images"):
-    """Convert PDF to images"""
     os.makedirs(output_dir, exist_ok=True)
 
     pages = convert_from_path(pdf_path, dpi=300)
@@ -138,7 +86,7 @@ def extract_json_from_response(response_text):
                     except json.JSONDecodeError:
                         break
     
-    json_pattern = r'\{\s*"result"\s*:\s*"[^"]*"\s*,\s*"reason"\s*:\s*"[^"]*"\s*,\s*"confidence"\s*:\s*"[^"]*"\s*\}'
+        json_pattern = r'\{\s*"result"\s*:\s*"[^"]*"\s*,\s*"reason"\s*:\s*"[^"]*"\s*,\s*"confidence"\s*:\s*"[^"]*"\s*\}'
     match = re.search(json_pattern, text, re.DOTALL)
     if match:
         try:
@@ -215,6 +163,7 @@ RESPOND WITH JSON ONLY:"""
             reason = parsed.get("reason", "No reason provided")
             confidence = parsed.get("confidence", "Low")
             
+            # Normalize result values
             result_upper = result.strip().lower()
             if result_upper in ["yes", "compliant", "pass", "true"]:
                 result = "Yes"
@@ -223,13 +172,14 @@ RESPOND WITH JSON ONLY:"""
             else:
                 result = "Needs Review"
             
-            # conf_upper = confidence.strip().lower()
-            # if conf_upper in ["high", "h"]:
-            #     confidence = "High"
-            # elif conf_upper in ["medium", "med", "m", "moderate"]:
-            #     confidence = "Medium"
-            # else:
-            #     confidence = "Low"
+            # Normalize confidence values
+            conf_upper = confidence.strip().lower()
+            if conf_upper in ["high", "h"]:
+                confidence = "High"
+            elif conf_upper in ["medium", "med", "m", "moderate"]:
+                confidence = "Medium"
+            else:
+                confidence = "Low"
             
             return {
                 "result": result,
@@ -256,16 +206,13 @@ def get_user_inputs():
     """Get casting specifications from user"""
     print("=== CASTING DESIGN ANALYSIS v1 ===\n")
     
-    excel_path = input("Enter path to casting rules Excel file: ").strip()
-    if not os.path.exists(excel_path):
-        print(f"Error: Excel file not found: {excel_path}")
-        return None
-    
+    # Get PDF path
     pdf_path = input("Enter path to casting drawing PDF: ").strip()
     if not os.path.exists(pdf_path):
         print(f"Error: PDF file not found: {pdf_path}")
         return None
     
+    # Get casting type
     print("\nCasting Type Options:")
     casting_types = [
         "Sand Casting",
@@ -301,6 +248,7 @@ def get_user_inputs():
         print("Invalid input, using 'General Casting'")
         casting_type = "General Casting"
     
+    # Get material
     print(f"\nMaterial Options:")
     materials = list(MATERIAL_PROPERTIES.keys())
     for i, material in enumerate(materials, 1):
@@ -323,12 +271,14 @@ def get_user_inputs():
         print("Invalid input, using 'Gray Cast Iron'")
         material = "Gray Cast Iron"
     
+    # Get production volume
     try:
         volume = int(input("\nEnter production volume (number of parts): ").strip())
     except ValueError:
         print("Invalid input, using default volume of 100")
         volume = 100
     
+    # Get casting process from user (no automatic suggestion)
     print(f"\nCasting Process Options:")
     processes = ["Sand Casting", "Investment Casting", "Die Casting", "Permanent Mold Casting", "Other"]
     for i, process in enumerate(processes, 1):
@@ -349,6 +299,7 @@ def get_user_inputs():
         print("Invalid input, using 'To Be Determined'")
         suggested_process = "To Be Determined"
     
+    # Get additional requirements (optional)
     tolerance = input("\nTolerance requirements (e.g., ±0.5mm) [Optional]: ").strip() or "Standard"
     surface_finish = input("Surface finish requirements (e.g., Ra 3.2) [Optional]: ").strip() or "As-cast"
     
@@ -363,8 +314,7 @@ def get_user_inputs():
     
     # Display summary
     print(f"\n=== ANALYSIS PARAMETERS ===")
-    print(f"Rules Excel: {os.path.basename(excel_path)}")
-    print(f"Drawing PDF: {os.path.basename(pdf_path)}")
+    print(f"PDF: {os.path.basename(pdf_path)}")
     print(f"Casting Type: {casting_type}")
     print(f"Material: {material}")
     print(f"Production Volume: {volume:,} parts")
@@ -377,7 +327,7 @@ def get_user_inputs():
         print("Analysis cancelled.")
         return None
     
-    return excel_path, pdf_path, casting_context
+    return pdf_path, casting_context
 
 def evaluate_rule(rule, image_parts, context):
     """
@@ -391,6 +341,7 @@ def evaluate_rule(rule, image_parts, context):
         
         result = evaluate_checklist_item(rule, check_item, image_parts, context)
         
+        # Get recommended action for 'No' results with customized context
         recommended_action = get_recommended_action(rule, check_item, result['result'], context)
         
         results.append({
@@ -398,6 +349,7 @@ def evaluate_rule(rule, image_parts, context):
             "check_text": check_item['text'],
             "result": result['result'],
             "reason": result['reason'],
+            "confidence": result['confidence'],
             "recommended_action": recommended_action
         })
         
@@ -408,20 +360,24 @@ def evaluate_rule(rule, image_parts, context):
 def run_rule_engine():
     """Main function with user input and customized analysis"""
     
+    # Get user inputs
     user_inputs = get_user_inputs()
     if user_inputs is None:
         return
     
-    excel_path, pdf_path, casting_context = user_inputs
+    pdf_path, casting_context = user_inputs
     
     print(f"\n=== STARTING ANALYSIS ===")
     
-    print("Loading rules from Excel...")
-    rules_data = load_rules_from_excel(excel_path)
+    # Load rules
+    with open(RULES_PATH, "r") as f:
+        rules_data = json.load(f)
 
+    # Convert PDF to images
     print("Converting PDF to images...")
     image_paths = pdf_to_images(pdf_path)
     
+    # Pre-load images as Part objects
     print("Loading images for AI analysis...")
     image_parts = []
     for img in image_paths:
@@ -449,7 +405,7 @@ def run_rule_engine():
                 "Checklist Item": sub["check_text"],
                 "Result (Yes/No)": sub["result"],
                 "Notes / Observations": sub["reason"],
-                # "Confidence": sub["confidence"],
+                "Confidence": sub["confidence"],
                 "Recommended Actions": sub["recommended_action"]
             })
 
@@ -461,10 +417,12 @@ def run_rule_engine():
         f"casting_analysis_{material_short}_{volume_short}parts_{timestamp}.xlsx"
     )
 
+    # Create Excel with enhanced header information
     wb = Workbook()
     ws = wb.active
     ws.title = "Casting Analysis"
     
+    # Add analysis parameters at the top
     ws.merge_cells('A1:H1')
     ws['A1'] = f"CASTING DESIGN ANALYSIS - {casting_context['casting_type']}"
     ws['A1'].font = Font(bold=True, size=14)
@@ -480,6 +438,7 @@ def run_rule_engine():
     ws['A3'].font = Font(size=9)
     ws['A3'].alignment = Alignment(horizontal='center')
     
+    # Style definitions
     header_fill = PatternFill(start_color="4472C4", end_color="4472C4", fill_type="solid")
     header_font = Font(bold=True, color="FFFFFF")
     green_fill = PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid")
@@ -491,7 +450,8 @@ def run_rule_engine():
         bottom=Side(style='thin')
     )
     
-    headers = ["Rule ID", "Rule Title", "Check ID", "Checklist Item", "Result (Yes/No)", "Notes / Observations", "Recommended Actions"]
+    # Headers starting from row 5
+    headers = ["Rule ID", "Rule Title", "Check ID", "Checklist Item", "Result (Yes/No)", "Notes / Observations", "Confidence", "Recommended Actions"]
     for col, header in enumerate(headers, 1):
         cell = ws.cell(row=5, column=col, value=header)
         cell.fill = header_fill
@@ -499,6 +459,7 @@ def run_rule_engine():
         cell.alignment = Alignment(horizontal='center', vertical='center')
         cell.border = thin_border
     
+    # Data starting from row 6
     df = pd.DataFrame(checklist_rows)
     for r_idx, row in enumerate(df.values, 6):
         for c_idx, value in enumerate(row, 1):
@@ -506,12 +467,14 @@ def run_rule_engine():
             cell.border = thin_border
             cell.alignment = Alignment(vertical='center', wrap_text=True)
             
+            # Color code Result column (column 5)
             if c_idx == 5:
                 if value == "Yes":
                     cell.fill = green_fill
                 elif value == "No":
                     cell.fill = red_fill
     
+    # Merge cells for Rule ID and Rule Title
     current_rule = None
     merge_start = 6
     
@@ -532,6 +495,7 @@ def run_rule_engine():
             merge_start = row_idx
             current_rule = rule_id
     
+    # Set column widths
     ws.column_dimensions['A'].width = 10
     ws.column_dimensions['B'].width = 45
     ws.column_dimensions['C'].width = 10
@@ -543,10 +507,12 @@ def run_rule_engine():
     
     wb.save(output_file)
 
+    # Print comprehensive summary
     print(f"\n=== ANALYSIS COMPLETE ===")
     print(f"Report saved to: {output_file}")
     print(f"Successfully evaluated: {success_count}/{total_checks} checklist items")
     
+    # Results summary
     yes_count = sum(1 for row in checklist_rows if row["Result (Yes/No)"] == "Yes")
     no_count = sum(1 for row in checklist_rows if row["Result (Yes/No)"] == "No")
     review_count = sum(1 for row in checklist_rows if row["Result (Yes/No)"] == "Needs Review")

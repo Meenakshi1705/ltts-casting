@@ -1,4 +1,3 @@
-# casting_config.py
 # Configuration file for casting design analysis
 
 # Material properties for customized recommendations
@@ -33,13 +32,6 @@ MATERIAL_PROPERTIES = {
     }
 }
 
-# Process recommendations based on volume
-PROCESS_RECOMMENDATIONS = {
-    "low": {"max": 100, "processes": ["Sand Casting", "Investment Casting"]},
-    "medium": {"max": 10000, "processes": ["Investment Casting", "Permanent Mold"]},
-    "high": {"max": 1000000, "processes": ["Die Casting", "Permanent Mold"]}
-}
-
 # Casting type options
 CASTING_TYPES = [
     "Bracket Casting", "Housing Casting", "Connector Casting", 
@@ -59,12 +51,7 @@ def get_material_guidance(material):
 
 def get_volume_guidance(volume):
     """Get volume-specific guidance for AI evaluation"""
-    if volume <= 100:
-        return "Low volume production - sand casting typical. Focus on design flexibility and prototype considerations."
-    elif volume <= 10000:
-        return "Medium volume production - investment casting typical. Balance design complexity with tooling costs."
-    else:
-        return "High volume production - die casting typical. Emphasize tight tolerances, draft angles, and production efficiency."
+    return f"Production volume: {volume:,} parts - consider appropriate casting process based on volume economics and part complexity."
 
 def get_recommended_action(rule, check_item, result, casting_context):
     """
@@ -136,27 +123,17 @@ def get_recommended_action(rule, check_item, result, casting_context):
         }
     }
     
-    # Add volume-specific recommendations
-    volume_suffix = ""
-    if volume <= 100:
-        volume_suffix = " Consider sand casting for low volume production."
-    elif volume <= 10000:
-        volume_suffix = " Consider investment casting for medium volume production."
-    else:
-        volume_suffix = " Consider die casting for high volume production - design for tight tolerances."
+    # Add volume-specific note (without arbitrary process recommendations)
+    volume_suffix = f" Production volume: {volume:,} parts."
     
     base_rec = base_recommendations.get(rule_id, {}).get(check_id, f"Review {rule['title']} requirements for {material}")
     
     return base_rec + volume_suffix
 
 def get_process_suggestion(volume):
-    """Get suggested casting process based on production volume"""
-    if volume <= 100:
-        return "Sand Casting", "low"
-    elif volume <= 10000:
-        return "Investment Casting", "medium"
-    else:
-        return "Die Casting", "high"
+    """Get suggested casting process based on production volume - placeholder for proper logic"""
+    # TODO: Replace with industry-standard volume thresholds
+    return "To Be Determined", "unknown"
 
 def get_filename_components(casting_context):
     """Generate filename components for output file"""

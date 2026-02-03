@@ -1,5 +1,70 @@
 # Casting Design Assistant
 
+Command-line toolkit and small frontend for automated casting drawing checklist analysis using a generative AI backend.
+
+## Project layout (repo root)
+
+- `.env.example` — example environment file for local secrets.
+- `casting.py` — main CLI entrypoint (uses `google-generativeai` / Gemini). Prompts for an image/PDF and casting parameters and writes an Excel report to `output/`.
+- `casting_config.py` — material properties and helper functions.
+- `backend/` — backend modules and helpers (e.g., `rule_engine.py`).
+- `frontend/` — React/Vite frontend located under `frontend/casting-assistant/`.
+- `input/` — input assets (example rules, Excel samples, etc.). `casting.py` expects `input/rules.json` by default.
+- `output/` — generated Excel reports are saved here.
+- `images/` — temporary images converted from PDFs.
+- `req.txt` — Python package dependencies.
+
+## Notes about the code
+
+- `casting.py` is the active entrypoint. It uses the `google-generativeai` (Gemini) client and expects `GEMINI_API_KEY` as an environment variable (or in a `.env` file).
+- Rules are loaded from `input/rules.json` by default. See `casting.py`'s `load_rules_from_json()` for the required structure.
+
+## Prerequisites
+
+- Python 3.8+
+- Install Python packages:
+
+```powershell
+python -m pip install -r req.txt
+```
+
+- The script uses PyMuPDF for PDF→image conversion (no external poppler dependency is required when using PyMuPDF).
+
+## Environment
+
+- Copy `.env.example` to `.env` and set values, or export environment variables directly.
+- Set the Gemini API key (example PowerShell):
+
+```powershell
+$env:GEMINI_API_KEY = 'your_api_key_here'
+```
+
+## Usage
+
+```powershell
+# From repo root
+python casting.py
+```
+
+The script prompts for the drawing file (PDF/PNG/JPG) and casting parameters (type, material, volume, process, tolerance, surface finish).
+
+Outputs
+- Excel reports are saved to `output/` with names like `casting_analysis_<material>_<volume>parts_<timestamp>.xlsx`.
+
+## Implementation notes
+
+- AI integration: `casting.py` uses structured prompts and attempts to parse JSON responses robustly via `extract_json_from_response()`.
+- The code writes a formatted Excel report using `openpyxl` and uses `pandas` for tabular assembly.
+
+## Next steps I can help with
+
+- Add an example `input/rules.json` that matches `load_rules_from_json()`.
+- Add a `--rules` CLI flag to support JSON or Excel rule sources.
+- Add unit tests for rule loading and the PDF→image conversion flow.
+
+If you want me to apply any of these, tell me which one and I will implement it.
+# Casting Design Assistant
+
 Small command-line toolkit for automated casting drawing checklist analysis using an AI backend.
 
 **Project layout**
@@ -32,8 +97,6 @@ Environment
 - There is an `.env.example` in the project root — copy to `.env` and edit if you want to manage secrets locally.
 - If using Google Cloud credentials, set `GOOGLE_APPLICATION_CREDENTIALS` appropriately in your environment.
 
-Usage
-- From project root (where `v1.py` / `v1_c.py` live), run:
 
 ```powershell
 # Install deps once
@@ -48,9 +111,6 @@ Known issues / Notes
 - `pdf2image` requires poppler (system dependency) and may fail if not installed.
 - Vertex AI usage: the repo uses a `GenerativeModel` and `Part.from_data`. Ensure your environment, project, and permissions are configured before running.
 
-Development / Next steps
-- Fix the unreachable code block inside `v1.py`'s Excel loader (I can patch it now).
-- Add unit tests for rule loading and PDF conversion (there is `test_analysis.py` as a starter).
 
 Contact / Help
 - If you'd like, I can:

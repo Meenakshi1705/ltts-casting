@@ -1,0 +1,25 @@
+# Local environment variables
+.env
+.env.local
+
+# Python caches
+__pycache__/
+*.pyc
+
+# IDE / OS files
+.vscode/
+.idea/
+.DS_Store
+
+# Output / generated files
+/output/
+/images/
+
+# Keys and credentials
+*.pem
+*.key
+credentials.json
+service-account.json
+
+# Excel reports (optional - keep out of repo if large)
+*.xlsx

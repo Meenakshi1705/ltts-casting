@@ -1,0 +1,10 @@
+vertexai
+pandas
+openpyxl
+PyMuPDF
+fastapi
+uvicorn
+python-multipart
+google-generativeai
+Pillow
+python-dotenv

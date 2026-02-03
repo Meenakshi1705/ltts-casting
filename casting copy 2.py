@@ -1,12 +1,15 @@
 import json
 import time
 import re
-import vertexai
-from vertexai.generative_models import GenerativeModel, Part
+# import vertexai
+# from vertexai.generative_models import GenerativeModel, Part
+import google.generativeai as genai
+
 import pandas as pd
 from datetime import datetime
 import os
-from pdf2image import convert_from_path
+# from pdf2image import convert_from_path
+import fitz  # PyMuPDF
 from openpyxl import Workbook
 from openpyxl.styles import PatternFill, Font, Alignment, Border, Side
 from openpyxl.utils.dataframe import dataframe_to_rows
@@ -17,8 +20,23 @@ from casting_config import (
     get_process_suggestion, get_filename_components
 )
 
-PROJECT_ID = "gemini-gdandt-01"
-GEMINI_LOCATION = "us-central1"
+# PROJECT_ID = "gemini-gdandt-01"
+# GEMINI_LOCATION = "us-central1"
+
+# Try to load from .env file if available
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
+api_key = os.getenv("GEMINI_API_KEY")
+if not api_key:
+    print("Warning: GEMINI_API_KEY not found. Please set your API key.")
+    print("You can set it as an environment variable or in a .env file")
+    exit(1)
+
+genai.configure(api_key=api_key)
 GEMINI_MODEL = "gemini-2.5-flash"
 API_DELAY = 2
 API_TIMEOUT = 120  
@@ -27,12 +45,18 @@ RULES_PATH = r"D:\casting\input\Casting_Design_Checklist.xlsx"
 OUTPUT_DIR = "output"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-vertexai.init(project=PROJECT_ID, location=GEMINI_LOCATION)
+# vertexai.init(project=PROJECT_ID, location=GEMINI_LOCATION)
+# model = GenerativeModel(GEMINI_MODEL)
 
-model = GenerativeModel(GEMINI_MODEL)
+model = genai.GenerativeModel(
+    model_name=GEMINI_MODEL,
+    generation_config={
+        "temperature": 0,
+        "response_mime_type": "application/json"
+    }
+)
 
 def load_rules_from_excel(excel_path):
-    """Load rules from Excel checklist file"""
     df = pd.read_excel(excel_path)
     
     rules = []
@@ -70,7 +94,6 @@ def load_rules_from_excel(excel_path):
         rules.append(current_rule)
     
     return {"rules": rules}
-    os.makedirs(output_dir, exist_ok=True)
 
     pages = convert_from_path(pdf_path, dpi=300)
     image_paths = []
@@ -83,18 +106,25 @@ def load_rules_from_excel(excel_path):
     return image_paths
 
 
-def pdf_to_images(pdf_path, output_dir="images"):
-    """Convert PDF to images"""
+def pdf_to_images(pdf_path, output_dir="images", dpi=300):
+
     os.makedirs(output_dir, exist_ok=True)
 
-    pages = convert_from_path(pdf_path, dpi=300)
+    doc = fitz.open(pdf_path)
     image_paths = []
 
-    for i, page in enumerate(pages):
-        img_path = os.path.join(output_dir, f"page_{i+1}.png")
-        page.save(img_path, "PNG")
+    zoom = dpi / 72  # 72 DPI is PDF base
+    mat = fitz.Matrix(zoom, zoom)
+
+    for page_num in range(len(doc)):
+        page = doc.load_page(page_num)
+        pix = page.get_pixmap(matrix=mat, alpha=False)
+
+        img_path = os.path.join(output_dir, f"page_{page_num + 1}.png")
+        pix.save(img_path)
         image_paths.append(img_path)
 
+    doc.close()
     return image_paths
 
 
@@ -425,8 +455,9 @@ def run_rule_engine():
     print("Loading images for AI analysis...")
     image_parts = []
     for img in image_paths:
-        with open(img, "rb") as f:
-            image_parts.append(Part.from_data(data=f.read(), mime_type="image/png"))
+        from PIL import Image
+        image = Image.open(img)
+        image_parts.append(image)
 
     checklist_rows = []
     success_count = 0

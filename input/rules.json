@@ -1,0 +1,264 @@
+[
+  {
+    "rule_number": "1",
+    "rule_header": "Draft Angles & Withdrawal",
+    "hint_description": "Typical draft: 1–3° for sand, 0.5–1° for permanent mold/HPDC; deep pockets and textured surfaces may need more.",
+    "check_items": [
+      "External walls include draft ≥1.5°",
+      "Internal pockets and cores include draft ≥2–3°",
+      "Adequate release for bosses, ribs, deep cavities"
+    ]
+  },
+  {
+    "rule_number": "2",
+    "rule_header": "Parting Line & Cores",
+    "hint_description": "Minimize cores, ensure balanced fill, simplify machining fixturing.",
+    "check_items": [
+      "Parting line chosen on largest, flattest plane",
+      "Core count minimized; core prints well-supported",
+      "No hidden undercuts requiring complex tooling",
+      "Ejection feasible without marking critical surfaces"
+    ]
+  },
+  {
+    "rule_number": "3",
+    "rule_header": "Wall Thickness & Uniformity",
+    "hint_description": "Target uniform walls; avoid abrupt changes. Typical min wall: sand 4–6 mm, die cast 2–3 mm.",
+    "check_items": [
+      "Minimum wall thickness meets process capability",
+      "Thickness transitions gradual (≥1:3 taper or radii)",
+      "No isolated massive sections without cored relief",
+      "Ribs used to stiffen rather than thicken walls"
+    ]
+  },
+  {
+    "rule_number": "4",
+    "rule_header": "Fillets, Radii & Junctions",
+    "hint_description": "Generous fillets reduce stress and improve flow. Internal fillet ≥0.5× wall thickness.",
+    "check_items": [
+      "Internal corners have fillets ≥0.5× wall thickness",
+      "External edges eased to avoid sand breakage/tool wear",
+      "T/L/X junctions relieved to prevent hotspots",
+      "No knife-edge or feather-thin features"
+    ]
+  },
+  {
+    "rule_number": "5",
+    "rule_header": "Feeding, Risers & Hotspots",
+    "hint_description": "Identify heavy sections and provide directional solidification.",
+    "check_items": [
+      "Hotspots identified (isolated bosses, thick hubs, junctions)",
+      "Feeding aids (risers/risers pads) feasible",
+      "Chill-friendly access surfaces available",
+      "Directional solidification path plausible"
+    ]
+  },
+  {
+    "rule_number": "6",
+    "rule_header": "Gating & Flow Considerations",
+    "hint_description": "Provide space for ingates, runners, vents; avoid direct impingement.",
+    "check_items": [
+      "Ingate landing zones defined away from thin walls",
+      "Vent/overflow locations accommodated",
+      "Flow path avoids abrupt turns/stagnation pockets",
+      "Splash baffles / sacrificial pads possible"
+    ]
+  },
+  {
+    "rule_number": "7",
+    "rule_header": "Machining Allowances & Datums",
+    "hint_description": "Provide machining stock and robust datum scheme.",
+    "check_items": [
+      "Machining allowance specified per surface (e.g., 2–3 mm)",
+      "Datum scheme supports critical tolerances",
+      "Avoid machining through thin/porosity-prone areas",
+      "Tool access and cutter clearance verified"
+    ]
+  },
+  {
+    "rule_number": "8",
+    "rule_header": "Tolerances & GD&T Suitability",
+    "hint_description": "Casting tolerances must align with process capability (ISO 8062).",
+    "check_items": [
+      "Linear tolerances compatible with casting process",
+      "Geometric tolerances applied only where functional",
+      "Critical fits are machined or sleeved",
+      "Pattern shrink factors noted"
+    ]
+  },
+  {
+    "rule_number": "9",
+    "rule_header": "Holes, Threads & Inserts",
+    "hint_description": "Prefer post-machined threads; boss aspect ratio height:OD = 1–2:1.",
+    "check_items": [
+      "Threaded features planned for machining",
+      "Cored holes sized for cleaning and draft (≥1–2°)",
+      "Boss aspect ratios height:OD within 1–2:1",
+      "Insert seats/retention features modeled"
+    ]
+  },
+  {
+    "rule_number": "10",
+    "rule_header": "Distortion & Residual Stress",
+    "hint_description": "Symmetry and uniform mass reduce warp and residual stress.",
+    "check_items": [
+      "Mass distribution balanced around parting",
+      "Long slender features supported",
+      "Symmetry leveraged to reduce warp",
+      "Heat treatment/quench distortion considered"
+    ]
+  },
+  {
+    "rule_number": "11",
+    "rule_header": "Surface Finish & Markings",
+    "hint_description": "Specify realistic Ra; cast text height ≥0.5 mm, draft ≥1°.",
+    "check_items": [
+      "Finish callouts per process (Ra on machined faces)",
+      "Cast text height ≥0.5 mm and draft ≥1°",
+      "No cosmetic requirements on hidden surfaces",
+      "Gate/vent witness marks location acceptable"
+    ]
+  },
+  {
+    "rule_number": "12",
+    "rule_header": "Safety, Handling & Sustainability",
+    "hint_description": "Design for safe handling, trimming, and recycling.",
+    "check_items": [
+      "Defined lift/handling areas",
+      "Trimming/flash removal accessible",
+      "Core sand volume minimized",
+      "Recycle-friendly design (feeders removed cleanly)"
+    ]
+  },
+  {
+    "rule_number": "13",
+    "rule_header": "Visualize the Casting in the Mold",
+    "hint_description": "Create 3D drawings or small/full-scale models; study metal flow and solidification; help design cores, gates, risers, detect weaknesses",
+    "check_items": [
+      "3D drawings or models created",
+      "Study metal flow",
+      "Study solidification",
+      "Determine core design",
+      "Determine gate locations",
+      "Determine riser locations",
+      "Detect casting weaknesses",
+      "Ensure soundness"
+    ]
+  },
+  {
+    "rule_number": "14",
+    "rule_header": "Design for Soundness",
+    "hint_description": "Account for metal shrinkage; heavier sections near risers; proper feeding to avoid porosity",
+    "check_items": [
+      "Heavier sections near risers",
+      "Shrinkage accounted",
+      "Proper feeder placement",
+      "Avoid porosity"
+    ]
+  },
+  {
+    "rule_number": "15",
+    "rule_header": "Avoid Sharp Corners and Angles",
+    "hint_description": "Replace sharp angles with fillets/radii; minimize stress and heat concentration; avoid hot spots",
+    "check_items": [
+      "Replace sharp angles with fillets",
+      "Minimize stress concentration",
+      "Minimize heat concentration",
+      "Avoid hot spots",
+      "Round corners in junctions",
+      "Improve structural strength",
+      "Avoid localized weakness"
+    ]
+  },
+  {
+    "rule_number": "16",
+    "rule_header": "Minimize the Number of Sections",
+    "hint_description": "Reduce junctions where multiple sections meet; stagger sections or use cored holes to prevent hot spots",
+    "check_items": [
+      "Reduce junctions",
+      "Stagger sections",
+      "Use cored holes",
+      "Avoid hot spots",
+      "Simple wall sections preferred"
+    ]
+  },
+  {
+    "rule_number": "17",
+    "rule_header": "Employ Uniform Sections",
+    "hint_description": "Keep wall thickness uniform; heavy sections must be fed from risers",
+    "check_items": [
+      "Uniform wall thickness",
+      "Feed heavy sections from risers",
+      "Avoid shrinkage voids",
+      "Reduce material weight",
+      "Improve casting cost"
+    ]
+  },
+  {
+    "rule_number": "18",
+    "rule_header": "Correctly Proportion Inner Walls",
+    "hint_description": "Inner walls ~0.9× outer walls; avoid rapid section changes to prevent porosity",
+    "check_items": [
+      "Inner walls 0.9× outer",
+      "Avoid rapid thickness changes",
+      "Uniform section design",
+      "Core design optimized",
+      "Minimize heavy metal masses"
+    ]
+  },
+  {
+    "rule_number": "19",
+    "rule_header": "Fillet All Sharp Angles",
+    "hint_description": "Reduce stress, cracks, molding difficulty; fillet radius ≤0.5× section thickness",
+    "check_items": [
+      "Reduce stress concentration",
+      "Avoid cracks",
+      "Improve moldability",
+      "Fillet radius ≤0.5× thickness",
+      "Minimize number of fillets",
+      "Match inside/outside corner radii"
+    ]
+  },
+  {
+    "rule_number": "20",
+    "rule_header": "Avoid Abrupt Section Changes",
+    "hint_description": "Adjoining sections ≤2:1 thickness ratio; use fillets or wedges for larger differences",
+    "check_items": [
+      "Thickness ratio ≤2:1",
+      "Use fillets for small difference",
+      "Use wedges for large difference",
+      "Taper ≤1:4",
+      "Smooth transitions",
+      "Avoid abrupt change"
+    ]
+  },
+  {
+    "rule_number": "21",
+    "rule_header": "Maximize Design of Ribs and Brackets",
+    "hint_description": "Ribs increase stiffness; avoid cross ribbing; taper brackets or cast separately",
+    "check_items": [
+      "Ribs thickness ~80% adjoining wall",
+      "Avoid thin ribs on heavy sections",
+      "Avoid cross ribbing",
+      "Ribs deeper than thick",
+      "Staggered double “T” preferred",
+      "Taper “L” brackets",
+      "Cast separately if needed",
+      "Core openings in ribs"
+    ]
+  },
+  {
+    "rule_number": "22",
+    "rule_header": "Avoid Using Bosses, Lugs, and Pads",
+    "hint_description": "Minimize bosses; blend fillets; use machining if possible; uniform wall thickness",
+    "check_items": [
+      "Minimize thick bosses",
+      "Blend with fillets",
+      "Spread lugs",
+      "Uniform wall thickness at bosses",
+      "Machining instead of bosses",
+      "Avoid hot spots",
+      "Panel of uniform thickness"
+    ]
+  }
+]

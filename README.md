@@ -45,15 +45,12 @@ Outputs
 - Converted PDF pages are saved to `images/` by default.
 
 Known issues / Notes
-- `v1.py` currently contains a small bug: `load_rules_from_excel()` returns successfully but there is unreachable/duplicated PDF/image conversion code immediately after the return. This is a leftover paste and should be removed. I can patch this if you want.
-- `v1.py` and `v1_c.py` differ in how they handle rules and the `confidence` value — `v1_c.py` normalizes confidence values; `v1.py` has the normalization commented out and omits the `Confidence` column in the output. If you want consistent outputs, I can unify them.
 - `pdf2image` requires poppler (system dependency) and may fail if not installed.
 - Vertex AI usage: the repo uses a `GenerativeModel` and `Part.from_data`. Ensure your environment, project, and permissions are configured before running.
 
 Development / Next steps
 - Fix the unreachable code block inside `v1.py`'s Excel loader (I can patch it now).
 - Add unit tests for rule loading and PDF conversion (there is `test_analysis.py` as a starter).
-- Optionally consolidate `v1.py` and `v1_c.py` into a single script with a `--rules file` flag.
 
 Contact / Help
 - If you'd like, I can:

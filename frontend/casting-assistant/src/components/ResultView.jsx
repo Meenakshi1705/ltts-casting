@@ -22,7 +22,7 @@ const ResultView = ({ result }) => {
 
   if (!result) return null;
 
-  const { status, summary, casting_context, excel_filename, pdf_filename } = result;
+  const { status, summary, casting_context, drawing_filename } = result;
 
   if (status !== "success") {
     return (
@@ -40,8 +40,8 @@ const ResultView = ({ result }) => {
       <div className="result-summary">
         <div className="files-info">
           <h4>Input Files</h4>
-          <p><strong>Rules:</strong> {excel_filename}</p>
-          <p><strong>Drawing:</strong> {pdf_filename}</p>
+          <p><strong>Drawing:</strong> {drawing_filename}</p>
+          <p><strong>Rules:</strong> Constant rules.json (22 casting design rules)</p>
         </div>
 
         <div className="casting-info">

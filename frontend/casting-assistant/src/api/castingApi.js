@@ -2,10 +2,9 @@ import axios from "axios";
 
 const API_BASE_URL = "http://localhost:8000";
 
-export const runCastingCheck = async (excelFile, pdfFile, castingSpecs) => {
+export const runCastingCheck = async (drawingFile, castingSpecs) => {
   const formData = new FormData();
-  formData.append("excel_file", excelFile);
-  formData.append("pdf_file", pdfFile);
+  formData.append("drawing_file", drawingFile);
   formData.append("casting_type", castingSpecs.casting_type);
   formData.append("material", castingSpecs.material);
   formData.append("volume", castingSpecs.volume.toString());

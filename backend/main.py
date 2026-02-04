@@ -3,16 +3,20 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 import shutil
 import os
-from typing import List
+from PIL import Image
+import fitz  # PyMuPDF
 
-from backend.rule_engine import run_casting_analysis
+# Import the new simplified casting analysis function
+import sys
+sys.path.append('.')
+from casting import analyze_casting_image
 
 app = FastAPI()
 
 # 🔓 CORS for React
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Vite default
+    allow_origins=["http://localhost:5173", "http://localhost:5174"],  # Vite default
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -25,10 +29,33 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 
+def convert_pdf_to_image(pdf_path):
+    """Convert PDF to image if needed"""
+    if pdf_path.lower().endswith('.pdf'):
+        try:
+            doc = fitz.open(pdf_path)
+            page = doc.load_page(0)  # Get first page
+            
+            zoom = 300 / 72  # 300 DPI
+            mat = fitz.Matrix(zoom, zoom)
+            pix = page.get_pixmap(matrix=mat, alpha=False)
+            
+            # Save as temporary image
+            temp_image_path = pdf_path.replace('.pdf', '_temp.png')
+            pix.save(temp_image_path)
+            doc.close()
+            
+            return temp_image_path
+        except Exception as e:
+            print(f"Error converting PDF: {e}")
+            return None
+    else:
+        return pdf_path  # Already an image
+
+
 @app.post("/analyze")
 async def analyze_casting(
-    excel_file: UploadFile = File(...),
-    pdf_file: UploadFile = File(...),
+    drawing_file: UploadFile = File(...),
     casting_type: str = Form(...),
     material: str = Form(...),
     volume: int = Form(...),
@@ -37,17 +64,17 @@ async def analyze_casting(
     surface_finish: str = Form("As-cast")
 ):
     """
-    Receives Excel rules + PDF drawing + casting specs → runs analysis → returns result
+    Receives drawing file + casting specs → runs analysis → returns result
     """
-    # Save uploaded files
-    excel_path = os.path.join(UPLOAD_DIR, excel_file.filename)
-    pdf_path = os.path.join(UPLOAD_DIR, pdf_file.filename)
+    # Save uploaded file
+    file_extension = drawing_file.filename.split('.')[-1].lower()
+    if file_extension not in ['pdf', 'png', 'jpg', 'jpeg']:
+        return {"error": "Unsupported file type. Please upload PDF, PNG, or JPG files."}
     
-    with open(excel_path, "wb") as buffer:
-        shutil.copyfileobj(excel_file.file, buffer)
+    drawing_path = os.path.join(UPLOAD_DIR, drawing_file.filename)
     
-    with open(pdf_path, "wb") as buffer:
-        shutil.copyfileobj(pdf_file.file, buffer)
+    with open(drawing_path, "wb") as buffer:
+        shutil.copyfileobj(drawing_file.file, buffer)
 
     # Prepare casting context
     casting_context = {
@@ -59,16 +86,62 @@ async def analyze_casting(
         "surface_finish": surface_finish
     }
 
-    # 🔧 Run analysis with both files
-    result = run_casting_analysis(excel_path, pdf_path, casting_context, OUTPUT_DIR)
+    try:
+        # Convert PDF to image if needed
+        image_path = convert_pdf_to_image(drawing_path)
+        if image_path is None:
+            return {"error": "Could not process the uploaded file."}
+        
+        # 🔧 Run analysis with the new simplified function
+        result = analyze_casting_image(image_path, casting_context)
+        
+        # Clean up temporary image if created
+        if image_path != drawing_path and os.path.exists(image_path):
+            try:
+                os.remove(image_path)
+            except PermissionError:
+                pass  # File might still be in use, skip cleanup
+        
+        # Clean up uploaded file
+        if os.path.exists(drawing_path):
+            try:
+                os.remove(drawing_path)
+            except PermissionError:
+                pass  # File might still be in use, skip cleanup
 
-    return {
-        "status": "success",
-        "excel_filename": excel_file.filename,
-        "pdf_filename": pdf_file.filename,
-        "casting_context": casting_context,
-        "summary": result
-    }
+        return {
+            "status": "success",
+            "drawing_filename": drawing_file.filename,
+            "casting_context": casting_context,
+            "summary": result
+        }
+        
+    except Exception as e:
+        # Clean up files on error
+        if 'image_path' in locals() and image_path != drawing_path and os.path.exists(image_path):
+            try:
+                os.remove(image_path)
+            except PermissionError:
+                pass
+        if os.path.exists(drawing_path):
+            try:
+                os.remove(drawing_path)
+            except PermissionError:
+                pass
+            
+        return {
+            "status": "error",
+            "error": str(e),
+            "drawing_filename": drawing_file.filename,
+            "casting_context": casting_context,
+            "summary": {
+                "total_checks": 0,
+                "successful_evaluations": 0,
+                "results": {"compliant": 0, "non_compliant": 0, "needs_review": 0},
+                "output_file": None,
+                "details": []
+            }
+        }
 
 
 @app.get("/latest-report")

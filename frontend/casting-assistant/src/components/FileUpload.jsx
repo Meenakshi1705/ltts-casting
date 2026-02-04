@@ -2,8 +2,7 @@ import { useState } from "react";
 import { runCastingCheck } from "../api/castingApi";
 
 const FileUpload = ({ onResult }) => {
-  const [excelFile, setExcelFile] = useState(null);
-  const [pdfFile, setPdfFile] = useState(null);
+  const [drawingFile, setDrawingFile] = useState(null);
   const [loading, setLoading] = useState(false);
   
   // Casting specifications
@@ -32,12 +31,11 @@ const FileUpload = ({ onResult }) => {
   ];
 
   const handleSubmit = async () => {
-    if (!excelFile) return alert("Please upload an Excel rules file");
-    if (!pdfFile) return alert("Please upload a PDF drawing file");
+    if (!drawingFile) return alert("Please upload a drawing file (PDF/PNG/JPG)");
 
     setLoading(true);
     try {
-      const result = await runCastingCheck(excelFile, pdfFile, castingSpecs);
+      const result = await runCastingCheck(drawingFile, castingSpecs);
       onResult(result);
     } catch (err) {
       console.error(err);
@@ -59,26 +57,26 @@ const FileUpload = ({ onResult }) => {
       <h2>Casting Design Analysis</h2>
       
       <div className="file-section">
-        <h3>Upload Files</h3>
+        <h3>Upload Drawing</h3>
         <div className="file-input-group">
           <label>
-            Excel Rules File (.xlsx):
+            Drawing File (PDF, PNG, or JPG):
             <input
               type="file"
-              accept=".xlsx,.xls"
-              onChange={(e) => setExcelFile(e.target.files[0])}
+              accept=".pdf,.png,.jpg,.jpeg"
+              onChange={(e) => setDrawingFile(e.target.files[0])}
             />
-          </label>
-          
-          <label>
-            PDF Drawing File (.pdf):
-            <input
-              type="file"
-              accept=".pdf"
-              onChange={(e) => setPdfFile(e.target.files[0])}
-            />
+            {drawingFile && (
+              <span className="file-info">
+                Selected: {drawingFile.name} ({(drawingFile.size / 1024 / 1024).toFixed(2)} MB)
+              </span>
+            )}
           </label>
         </div>
+        <p className="info-text">
+          <strong>Note:</strong> The system uses a constant set of 22 casting design rules. 
+          Simply upload your drawing and specify the casting parameters below.
+        </p>
       </div>
 
       <div className="specs-section">
@@ -155,7 +153,7 @@ const FileUpload = ({ onResult }) => {
 
       <button 
         onClick={handleSubmit} 
-        disabled={loading || !excelFile || !pdfFile}
+        disabled={loading || !drawingFile}
         className="analyze-button"
       >
         {loading ? "Analyzing..." : "Run Analysis"}

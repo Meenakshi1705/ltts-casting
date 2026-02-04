@@ -1,101 +1,141 @@
 # Casting Design Assistant
 
-Command-line toolkit and small frontend for automated casting drawing checklist analysis using a generative AI backend.
+An AI-powered application for automated casting drawing analysis and validation. Combines a Python backend (FastAPI) with a React/Vite frontend for interactive casting design evaluation.
 
-## Project layout (repo root)
+## Project Layout
 
-- `.env.example` — example environment file for local secrets.
-- `casting.py` — main CLI entrypoint (uses `google-generativeai` / Gemini). Prompts for an image/PDF and casting parameters and writes an Excel report to `output/`.
-- `casting_config.py` — material properties and helper functions.
-- `backend/` — backend modules and helpers (e.g., `rule_engine.py`).
-- `frontend/` — React/Vite frontend located under `frontend/casting-assistant/`.
-- `input/` — input assets (example rules, Excel samples, etc.). `casting.py` expects `input/rules.json` by default.
-- `output/` — generated Excel reports are saved here.
-- `images/` — temporary images converted from PDFs.
-- `req.txt` — Python package dependencies.
+```
+casting/
+├── backend/                           # FastAPI backend
+│   ├── main.py                        # API endpoints and PDF-to-image conversion
+│   └── rule_engine.py                 # Legacy rule engine module
+├── frontend/casting-assistant/        # React/Vite web UI
+│   ├── src/
+│   │   ├── api/castingApi.js          # API client for backend communication
+│   │   ├── components/
+│   │   │   ├── FileUpload.jsx         # File upload and casting specs form
+│   │   │   └── ResultView.jsx         # Results display and analysis summary
+│   │   └── index.css                  # Styling
+│   └── package.json
+├── input/
+│   └── rules.json                     # 22 casting design rules
+├── output/                            # Generated Excel analysis reports
+├── casting.py                         # CLI entry point with Gemini AI integration
+├── casting_config.py                  # Material properties and helpers
+├── req.txt                            # Python dependencies
+├── .env.example                       # Environment variables template
+└── README.md
+```
 
-## Notes about the code
+## Features
 
-- `casting.py` is the active entrypoint. It uses the `google-generativeai` (Gemini) client and expects `GEMINI_API_KEY` as an environment variable (or in a `.env` file).
-- Rules are loaded from `input/rules.json` by default. See `casting.py`'s `load_rules_from_json()` for the required structure.
+- **Single Drawing Upload**: Upload PDF, PNG, or JPG engineering drawings
+- **Casting Parameters**: Specify casting type, material, volume, process, tolerance, and surface finish
+- **AI Analysis**: Uses Google Generative AI (Gemini) to analyze drawings against 22 casting design rules
+- **Excel Reports**: Generates detailed analysis reports with compliance status and recommendations
+- **REST API**: FastAPI backend with CORS support for web frontend
+- **Interactive UI**: React/Vite frontend for easy user interaction
 
 ## Prerequisites
 
 - Python 3.8+
+- Node.js/npm (for frontend development)
 - Install Python packages:
 
 ```powershell
 python -m pip install -r req.txt
 ```
 
-- The script uses PyMuPDF for PDF→image conversion (no external poppler dependency is required when using PyMuPDF).
+## Environment Setup
 
-## Environment
-
-- Copy `.env.example` to `.env` and set values, or export environment variables directly.
-- Set the Gemini API key (example PowerShell):
+1. Copy `.env.example` to `.env`:
 
 ```powershell
-$env:GEMINI_API_KEY = 'your_api_key_here'
+Copy-Item .env.example .env
 ```
 
-## Usage
+2. Add your Gemini API key to `.env`:
+
+```powershell
+$env:GEMINI_API_KEY = 'your_gemini_api_key_here'
+```
+
+## Running the Application
+
+### Backend (FastAPI)
 
 ```powershell
 # From repo root
-python casting.py
+python -m uvicorn backend.main:app --reload --host localhost --port 8000
 ```
 
-The script prompts for the drawing file (PDF/PNG/JPG) and casting parameters (type, material, volume, process, tolerance, surface finish).
-
-Outputs
-- Excel reports are saved to `output/` with names like `casting_analysis_<material>_<volume>parts_<timestamp>.xlsx`.
-
-## Implementation notes
-
-- AI integration: `casting.py` uses structured prompts and attempts to parse JSON responses robustly via `extract_json_from_response()`.
-- The code writes a formatted Excel report using `openpyxl` and uses `pandas` for tabular assembly.
-
-## Next steps I can help with
-
-- Add an example `input/rules.json` that matches `load_rules_from_json()`.
-- Add a `--rules` CLI flag to support JSON or Excel rule sources.
-- Add unit tests for rule loading and the PDF→image conversion flow.
-
-If you want me to apply any of these, tell me which one and I will implement it.
-# Casting Design Assistant
-
-Small command-line toolkit for automated casting drawing checklist analysis using an AI backend.
-
-**Project layout**
-
-- `casting.py`, `casting_config.py` - helpers and configuration for material/property guidance and filename helpers.
-- `backend/` - small backend module (contains `rule_engine.py` used by earlier iterations).
-- `frontend/casting-assistant/` - web frontend (React/Vite) for interactive UI.
-- `input/` - input assets (e.g., Excel checklist sample).
-- `output/` - program output (generated Excel reports).
-- `images/` - image outputs (generated from PDFs).
-- `rules/` - (expected) JSON rules file location used by `v1_c.py`.
-
-Quick notes:
-- The repository uses Vertex AI (`vertexai`) to call a generative model; the code expects `vertexai` and `vertexai.generative_models` to be available.
-- PDF processing uses `pdf2image` and `poppler` (system dependency) to convert pages to PNG.
-- Excel outputs are built with `openpyxl`; data manipulation uses `pandas`.
-
-Prerequisites
-- Python 3.8+
-- Install Python dependencies from `req.txt`:
+### Frontend (React/Vite)
 
 ```powershell
-python -m pip install -r req.txt
+cd frontend/casting-assistant
+npm install
+npm run dev
 ```
 
-- poppler (Windows): download Poppler for Windows and add its `bin` folder to `PATH` so `pdf2image` can call it.
-- Google/Vertex AI credentials (if using the Vertex AI model locally): ensure you are authenticated and any required env vars/keys are set. The scripts set `PROJECT_ID` and `GEMINI_LOCATION` in the source; adapt as needed.
+The frontend will be available at `http://localhost:5173` (or `http://localhost:5174` as fallback).
 
-Environment
-- There is an `.env.example` in the project root — copy to `.env` and edit if you want to manage secrets locally.
-- If using Google Cloud credentials, set `GOOGLE_APPLICATION_CREDENTIALS` appropriately in your environment.
+## API Endpoints
+
+### POST `/analyze`
+Analyzes a casting drawing against design rules.
+
+**Request:**
+- `drawing_file` (file): PDF, PNG, or JPG drawing
+- `casting_type` (string): Type of casting process
+- `material` (string): Material specification
+- `volume` (int): Production volume
+- `process` (string): Manufacturing process
+- `tolerance` (string): Tolerance specification
+- `surface_finish` (string): Surface finish requirement
+
+**Response:**
+```json
+{
+  "status": "success",
+  "drawing_filename": "drawing.pdf",
+  "casting_context": { ... },
+  "summary": {
+    "total_checks": 22,
+    "successful_evaluations": 22,
+    "results": {
+      "compliant": 18,
+      "non_compliant": 2,
+      "needs_review": 2
+    },
+    "output_file": "casting_analysis_..._timestamp.xlsx",
+    "details": [ ... ]
+  }
+}
+```
+
+### GET `/latest-report`
+Retrieves the most recent analysis report.
+
+### GET `/download/{filename}`
+Downloads a generated Excel report file.
+
+### GET `/health`
+Health check endpoint.
+
+## Implementation Details
+
+- **PDF Conversion**: Uses PyMuPDF (fitz) to convert PDFs to high-resolution images (300 DPI)
+- **AI Analysis**: `casting.py` uses Google Generative AI with structured prompts for JSON parsing
+- **Excel Generation**: `openpyxl` for report formatting, `pandas` for data assembly
+- **API Integration**: FastAPI with CORS middleware for cross-origin requests from frontend
+
+## Key Files
+
+- `casting.py` - Main CLI and AI analysis logic with `analyze_casting_image()` function
+- `backend/main.py` - FastAPI routes, file handling, PDF conversion
+- `frontend/casting-assistant/src/api/castingApi.js` - API client wrapper
+- `input/rules.json` - 22 casting design rules database
+- `casting_config.py` - Material properties and configuration helpers
 
 
 ```powershell
